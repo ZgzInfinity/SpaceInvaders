@@ -40,7 +40,7 @@ struct Nave {
      * Post: Ha creado una nave enemiga o de jugador a partir de los datos facilitados
      *       como parametros
      */
-    void construirNave(int anchoBala, int altoBala, int anchoPersonaje,
+     Nave(int anchoBala, int altoBala, int anchoPersonaje,
                        int altoPersonaje, int posNavX, int posNavY, int direccionBala, int tip, int vid);
 
 

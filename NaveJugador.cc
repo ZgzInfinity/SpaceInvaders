@@ -11,12 +11,28 @@
  * Post: Ha creado una nave enemiga o de jugador a partir de los datos facilitados
  *       como parametros
  */
-void NaveJugador::construirNave(char* rutaNave, char* rutaBala, int anchoBala, int altoBala,
-                  int anchoPersonaje, int altoPersonaje, int posNavX, int posNavY, int direccionBala, int tip, int vid){
-
-    // Invocacion al constructor de la clase padre
-    Nave::construirNave(anchoBala, altoBala, anchoPersonaje, altoPersonaje,
-                        posNavX, posNavY, direccionBala, tip, vid);
+void NaveJugador::construirNave(char* rutaNave, char* rutaBala, int anchoBala, int altoBala,int anchoPersonaje, int altoPersonaje,
+                         int posNavX, int posNavY, int direccionBala, int tip, int vid){
+    // Asignacion de las coordenadas de la nave
+    posNaveX = posNavX;
+    posNaveY = posNavY;
+    // Establecer el numero total de disparos de la nave y
+    // cuantos se han disparado ya
+    max_disp = 4;
+    nDisparos = 0;
+    // Contador de tiempo de la nave
+    tick = 0;
+    // Dimensiones del tipo de bala que dispara
+    ancho_b = anchoBala;
+    alto_b = altoBala;
+    // Dimensiones del tipo de la nave
+    ancho_p = anchoPersonaje;
+    alto_p = altoPersonaje;
+    // Direccion de disparo de la bala
+    direccion = direccionBala;
+    // Tipo de nave y numero de vidas
+    tipo = tip;
+    vidas = vid;
 
     // Bitmaps con las imagenes de la nave del jugador y enemiga
     imgNave = load_bitmap(rutaNave, NULL);

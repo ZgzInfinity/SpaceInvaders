@@ -15,7 +15,7 @@
  * Representacion del tipo de dato Nave
  */
 
-struct NaveEnemigo : Nave{
+struct NaveEnemigo {
     // Coordenadas x e y de la nave
     int posNaveX;
     int posNaveY;
@@ -52,7 +52,7 @@ struct NaveEnemigo : Nave{
      *       como parametros
      */
     void construirNave(char* rutaNave, char* rutaBala, int anchoBala, int altoBala, int anchoPersonaje,
-                       int altoPersonaje, int posNavX, int posNavY, int direccionBala, int tip, int vid);
+                int altoPersonaje, int posNavX, int posNavY, int direccionBala, int tip, int vid);
 
 
 

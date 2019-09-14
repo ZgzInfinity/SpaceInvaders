@@ -59,24 +59,31 @@ int main(){
     imprimirFondoInicial(buffer);
 
     NaveJugador n;
+    n.construirNave("Imagenes/nave.bmp", "Imagenes/bala2.bmp", 6, 12, 30, 20, 350, 340, -8, 0, 3);
+
     NaveEnemigo e[60];
     insertarEnemigos(e);
-    n.construirNave("Imagenes/nave.bmp", "Imagenes/bala2.bmp", 6, 12, 30, 20, 350, 340, -8, 0, 3);
-    Bala disparos[n.max_disp];
-    Bala disparosEnem[e[0].max_disp];
+
+    Bala disparos[4];
+
+    Bala disparosEnem[4];
 
 
     int azarEnemigo = rand() % 55;
     int mov = 0;
+
+
 
     while (!key[KEY_ESC]){
          clear_to_color(buffer, 0x000000);
          n.pintar(buffer, 0, 0);
          n.mover();
 
+
          if (key[KEY_SPACE] && n.temporizador(5))
          crear_bala(n.nDisparos, n.max_disp, disparos, n.posNaveX, n.posNaveY, n.direccion);
          n.disparar(disparos, buffer);
+
 
          for (int i = 0; i < 55; i++){
             eliminar_bala_choque(n, e[i], disparos);

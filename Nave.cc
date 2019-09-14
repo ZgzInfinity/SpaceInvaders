@@ -11,7 +11,7 @@
  * Post: Ha creado una nave enemiga o de jugador a partir de los datos facilitados
  *       como parametros
  */
-void Nave::construirNave(int anchoBala, int altoBala, int anchoPersonaje,
+Nave::Nave(int anchoBala, int altoBala, int anchoPersonaje,
                          int altoPersonaje, int posNavX, int posNavY, int direccionBala, int tip, int vid){
 
     // Asignacion de las coordenadas de la nave
