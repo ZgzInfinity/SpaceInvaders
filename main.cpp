@@ -7,104 +7,40 @@
 
 #include <ctime>
 #include <cstdlib>
-#include "inicia.h"
-#include "disparos.h"
+#include "Iniciador.h"
+#include "Bala.h"
+#include "NaveJugador.h"
+#include "NaveEnemigo.h"
+#include "Graficos.h"
 
 
 using namespace std;
 
 
-struct Nave {
-    int posNaveX;
-    int posNaveY;
-    int nDisparos;
-    int max_disp;
-    int tick;
-    int ancho_b, alto_b;
-    int ancho_p, alto_p;
-    int direccion;
-
-    BITMAP *imgNave;
-    BITMAP *imgBala;
-
-    void inicia(char* rutaNave, char* rutaBala, int anchoBala, int altoBala,
-                int anchoPersonaje, int altoPersonaje, int posNavX, int posNavY, int direccionBala);
-    void pintar(BITMAP* buffer);
-    void mover();
-    bool temporizador();
-    void disparar(struct Balas disparos[], BITMAP* buffer);
-};
-
-
-void Nave::inicia(char* rutaNave, char* rutaBala, int anchoBala, int altoBala,
-                  int anchoPersonaje, int altoPersonaje, int posNavX, int posNavY, int direccionBala){
-    posNaveX = posNavX;
-    posNaveY = posNavY;
-    max_disp = 4;
-    nDisparos = 0;
-    imgBala = load_bitmap(rutaBala, NULL);
-    imgNave = load_bitmap(rutaNave, NULL);
-    tick = 0;
-    ancho_b = anchoBala;
-    alto_b = altoBala;
-    ancho_p = anchoPersonaje;
-    alto_p = altoPersonaje;
-    direccion = direccionBala;
-}
-
-
-void Nave::pintar(BITMAP* buffer){
-    masked_blit(imgNave, buffer,0, 0, posNaveX, posNaveY, ancho_p, alto_p);
-}
-
-void Nave::mover(){
-    if(key[KEY_LEFT]){
-        posNaveX -= 5;
-    }
-    if (key[KEY_RIGHT]){
-        posNaveX += 5;
-    }
-}
-
-
-bool Nave::temporizador(){
-    tick++;
-    if (tick == 5){
-        tick = 0;
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-
-void Nave::disparar(struct Balas disparos[], BITMAP* buffer){
-    if (key[KEY_SPACE] && temporizador()){
-            crear_bala(nDisparos, max_disp, disparos, posNaveX, posNaveY, direccion);
-    }
-    pintar_bala(nDisparos, max_disp, disparos, buffer, imgBala, ancho_b, alto_b);
-    elimina_bala(nDisparos, max_disp, disparos, 700, 390);
-}
-
-
-void insertarEnemigos(struct Nave e[]){
+void insertarEnemigos(NaveEnemigo e[]){
     int indice = -1;
+    int tipo = 0;
     for (int i = 0; i < 5; i++){
+        tipo++;
+        if (tipo == 4){
+            tipo = 1;
+        }
         for (int j = 0; j < 11; j++){
             indice++;
-            e[indice].inicia("Imagenes/enemigos.bmp", "Imagenes/Bala_enem.bmp", 6, 12, 25, 20, 140 + j * 30, 100 + i * 24, 8);
+            e[indice].construirNave("Imagenes/enemigos.bmp", "Imagenes/Bala_enem.bmp", 6, 12, 25, 20, 140 + j * 30, 100 + i * 24, 8, tipo, 1);
         }
     }
 }
 
 
-void pintarEnemigo(struct Nave e[], BITMAP * buffer){
+void pintarEnemigo(NaveEnemigo e[], BITMAP * buffer, int mov){
     int indice = -1;
     for (int i = 0; i < 5; i++){
         for (int j = 0; j < 11; j++){
             indice++;
-            e[indice].pintar(buffer);
+            if (e[indice].vidas > 0){
+                e[indice].pintar(buffer, mov, e[indice].tipo - 1);
+            }
         }
     }
 }
@@ -112,58 +48,54 @@ void pintarEnemigo(struct Nave e[], BITMAP * buffer){
 
 int main(){
 
+    srand(time(NULL));
+
     inicia_allegro(700, 390);
     inicia_audio(70,70);
     install_mouse();
 
     BITMAP *buffer = create_bitmap(700, 390);
-    BITMAP *menuReposo = load_bitmap("Imagenes/menuReposo.bmp", NULL);
-    BITMAP *menuComenzar = load_bitmap("Imagenes/menuComenzar.bmp", NULL);
-    BITMAP *menuOpciones = load_bitmap("Imagenes/menuOpciones.bmp", NULL);
-    BITMAP *cursor = load_bitmap("Imagenes/cursor.bmp", NULL);
 
+    imprimirFondoInicial(buffer);
 
-    bool comenzarJuego = false;
-    bool entrarOpciones = false;
-
-    while (!comenzarJuego && !entrarOpciones){
-        if (mouse_x > 125 && mouse_x < 303 && mouse_y > 260 && mouse_y < 291){
-            blit(menuComenzar, buffer, 0, 0, 0, 0, 700, 390);
-            if (mouse_b & 1){
-                comenzarJuego = true;
-            }
-        }
-        else if (mouse_x > 374 && mouse_x < 535 && mouse_y > 260 && mouse_y < 291){
-            blit(menuOpciones, buffer, 0, 0, 0, 0, 700, 390);
-            if (mouse_b & 1){
-                entrarOpciones = true;
-            }
-        }
-        else {
-            blit(menuReposo, buffer, 0, 0, 0, 0, 700, 390);
-        }
-
-        masked_blit(cursor, buffer, 0, 0, mouse_x, mouse_y, 13, 22);
-        blit(buffer, screen, 0, 0, 0, 0, 700, 390);
-
-    }
-
-    Nave n;
-    Nave e[60];
+    NaveJugador n;
+    NaveEnemigo e[60];
     insertarEnemigos(e);
-    n.inicia("Imagenes/nave.bmp", "Imagenes/bala2.bmp", 6, 12, 30, 20, 350, 340, -8);
-    Balas disparos[n.max_disp];
-    Balas disparosEnem[e[0].max_disp];
+    n.construirNave("Imagenes/nave.bmp", "Imagenes/bala2.bmp", 6, 12, 30, 20, 350, 340, -8, 0, 3);
+    Bala disparos[n.max_disp];
+    Bala disparosEnem[e[0].max_disp];
 
+
+    int azarEnemigo = rand() % 55;
+    int mov = 0;
 
     while (!key[KEY_ESC]){
          clear_to_color(buffer, 0x000000);
-         n.pintar(buffer);
+         n.pintar(buffer, 0, 0);
          n.mover();
+
+         if (key[KEY_SPACE] && n.temporizador(5))
+         crear_bala(n.nDisparos, n.max_disp, disparos, n.posNaveX, n.posNaveY, n.direccion);
          n.disparar(disparos, buffer);
 
-         pintarEnemigo(e, buffer);
+         for (int i = 0; i < 55; i++){
+            eliminar_bala_choque(n, e[i], disparos);
+         }
 
+         pintarEnemigo(e, buffer, mov);
+
+         if (e[azarEnemigo].nDisparos == 0){
+            azarEnemigo = rand() % 55;
+         }
+
+         e[azarEnemigo].disparar(disparosEnem, buffer);
+         if (e[0].temporizador(30)){
+            if (++mov == 2){
+                mov = 0;
+            }
+         }
+
+         // imprimirFondo(fondoEspacio, buffer);
          blit(buffer, screen, 0, 0, 0, 0, 700, 390);
          rest(20);
     }
