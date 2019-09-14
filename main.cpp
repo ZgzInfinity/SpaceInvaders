@@ -5,7 +5,8 @@
  **********************************************************
  */
 
-
+#include <ctime>
+#include <cstdlib>
 #include "inicia.h"
 #include "disparos.h"
 
@@ -21,12 +22,13 @@ struct Nave {
     int tick;
     int ancho_b, alto_b;
     int ancho_p, alto_p;
+    int direccion;
 
     BITMAP *imgNave;
     BITMAP *imgBala;
 
     void inicia(char* rutaNave, char* rutaBala, int anchoBala, int altoBala,
-                int anchoPersonaje, int altoPersonaje, int posNavX, int posNavY);
+                int anchoPersonaje, int altoPersonaje, int posNavX, int posNavY, int direccionBala);
     void pintar(BITMAP* buffer);
     void mover();
     bool temporizador();
@@ -35,7 +37,7 @@ struct Nave {
 
 
 void Nave::inicia(char* rutaNave, char* rutaBala, int anchoBala, int altoBala,
-                  int anchoPersonaje, int altoPersonaje, int posNavX, int posNavY){
+                  int anchoPersonaje, int altoPersonaje, int posNavX, int posNavY, int direccionBala){
     posNaveX = posNavX;
     posNaveY = posNavY;
     max_disp = 4;
@@ -47,6 +49,7 @@ void Nave::inicia(char* rutaNave, char* rutaBala, int anchoBala, int altoBala,
     alto_b = altoBala;
     ancho_p = anchoPersonaje;
     alto_p = altoPersonaje;
+    direccion = direccionBala;
 }
 
 
@@ -78,12 +81,33 @@ bool Nave::temporizador(){
 
 void Nave::disparar(struct Balas disparos[], BITMAP* buffer){
     if (key[KEY_SPACE] && temporizador()){
-            crear_bala(nDisparos, max_disp, disparos, posNaveX, posNaveY, -8);
+            crear_bala(nDisparos, max_disp, disparos, posNaveX, posNaveY, direccion);
     }
     pintar_bala(nDisparos, max_disp, disparos, buffer, imgBala, ancho_b, alto_b);
     elimina_bala(nDisparos, max_disp, disparos, 700, 390);
 }
 
+
+void insertarEnemigos(struct Nave e[]){
+    int indice = -1;
+    for (int i = 0; i < 5; i++){
+        for (int j = 0; j < 11; j++){
+            indice++;
+            e[indice].inicia("Imagenes/enemigos.bmp", "Imagenes/Bala_enem.bmp", 6, 12, 25, 20, 140 + j * 30, 100 + i * 24, 8);
+        }
+    }
+}
+
+
+void pintarEnemigo(struct Nave e[], BITMAP * buffer){
+    int indice = -1;
+    for (int i = 0; i < 5; i++){
+        for (int j = 0; j < 11; j++){
+            indice++;
+            e[indice].pintar(buffer);
+        }
+    }
+}
 
 
 int main(){
@@ -125,11 +149,11 @@ int main(){
     }
 
     Nave n;
-    Nave e;
-    n.inicia("Imagenes/nave.bmp", "Imagenes/bala2.bmp", 6, 12, 30, 20, 350, 340);
-    e.inicia("Imagenes/enemigos.bmp", "Imagenes/Bala_enem.bmp", 6, 12, 25, 20, 50, 80);
+    Nave e[60];
+    insertarEnemigos(e);
+    n.inicia("Imagenes/nave.bmp", "Imagenes/bala2.bmp", 6, 12, 30, 20, 350, 340, -8);
     Balas disparos[n.max_disp];
-    Balas disparosEnem[e.max_disp];
+    Balas disparosEnem[e[0].max_disp];
 
 
     while (!key[KEY_ESC]){
@@ -138,9 +162,7 @@ int main(){
          n.mover();
          n.disparar(disparos, buffer);
 
-
-         e.pintar(buffer);
-         e.disparar(disparosEnem, buffer);
+         pintarEnemigo(e, buffer);
 
          blit(buffer, screen, 0, 0, 0, 0, 700, 390);
          rest(20);
