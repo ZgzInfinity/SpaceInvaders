@@ -13,7 +13,7 @@ void crear_bala(int& n_disparos, const int max_disparos,struct Balas disparos[],
                 const int X, const int Y ,const int dy);
 
 void pintar_bala(int& n_disparos, const int max_disparos,struct Balas disparos[],
-                 BITMAP* buffer, BITMAP* bala);
+                 BITMAP* buffer, BITMAP* bala, int ancho, int alto);
 
 void elimina_bala(int& n_disparos, const int max_disparos,struct Balas disparos[],
                   const int ANCHO, const int ALTO);

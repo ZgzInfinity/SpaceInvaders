@@ -16,14 +16,14 @@ void crear_bala(int& n_disparos, const int max_disparos ,struct Balas disparos[]
 }
 
 void pintar_bala(int& n_disparos, const int max_disparos,struct Balas disparos[],
-                 BITMAP* buffer, BITMAP* bala)
+                 BITMAP* buffer, BITMAP* bala, int ancho, int alto)
 {
 
      if ( n_disparos > 0 && n_disparos < max_disparos){
             for ( int cont = 1; cont <= n_disparos; cont++){
                        disparos[cont].x += disparos[cont].dx;
                        disparos[cont].y += disparos[cont].dy;
-                       masked_blit( bala, buffer, 0, 0, disparos[cont].x, disparos[cont].y, 6, 12);
+                       masked_blit( bala, buffer, 0, 0, disparos[cont].x, disparos[cont].y, ancho, alto);
             }
      }
 

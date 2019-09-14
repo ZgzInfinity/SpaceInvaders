@@ -19,30 +19,39 @@ struct Nave {
     int nDisparos;
     int max_disp;
     int tick;
+    int ancho_b, alto_b;
+    int ancho_p, alto_p;
 
     BITMAP *imgNave;
     BITMAP *imgBala;
 
-    void inicia(char* rutaNave, char* rutaBala);
+    void inicia(char* rutaNave, char* rutaBala, int anchoBala, int altoBala,
+                int anchoPersonaje, int altoPersonaje, int posNavX, int posNavY);
     void pintar(BITMAP* buffer);
     void mover();
     bool temporizador();
+    void disparar(struct Balas disparos[], BITMAP* buffer);
 };
 
 
-void Nave::inicia(char* rutaNave, char* rutaBala){
-    posNaveX = 350;
-    posNaveY = 340;
+void Nave::inicia(char* rutaNave, char* rutaBala, int anchoBala, int altoBala,
+                  int anchoPersonaje, int altoPersonaje, int posNavX, int posNavY){
+    posNaveX = posNavX;
+    posNaveY = posNavY;
     max_disp = 4;
     nDisparos = 0;
     imgBala = load_bitmap(rutaBala, NULL);
     imgNave = load_bitmap(rutaNave, NULL);
     tick = 0;
+    ancho_b = anchoBala;
+    alto_b = altoBala;
+    ancho_p = anchoPersonaje;
+    alto_p = altoPersonaje;
 }
 
 
 void Nave::pintar(BITMAP* buffer){
-    masked_blit(imgNave, buffer,0, 0, posNaveX, posNaveY, 30, 20);
+    masked_blit(imgNave, buffer,0, 0, posNaveX, posNaveY, ancho_p, alto_p);
 }
 
 void Nave::mover(){
@@ -65,6 +74,16 @@ bool Nave::temporizador(){
         return false;
     }
 }
+
+
+void Nave::disparar(struct Balas disparos[], BITMAP* buffer){
+    if (key[KEY_SPACE] && temporizador()){
+            crear_bala(nDisparos, max_disp, disparos, posNaveX, posNaveY, -8);
+    }
+    pintar_bala(nDisparos, max_disp, disparos, buffer, imgBala, ancho_b, alto_b);
+    elimina_bala(nDisparos, max_disp, disparos, 700, 390);
+}
+
 
 
 int main(){
@@ -106,21 +125,22 @@ int main(){
     }
 
     Nave n;
-    n.inicia("Imagenes/nave.bmp", "Imagenes/bala2.bmp");
+    Nave e;
+    n.inicia("Imagenes/nave.bmp", "Imagenes/bala2.bmp", 6, 12, 30, 20, 350, 340);
+    e.inicia("Imagenes/enemigos.bmp", "Imagenes/Bala_enem.bmp", 6, 12, 25, 20, 50, 80);
     Balas disparos[n.max_disp];
+    Balas disparosEnem[e.max_disp];
+
 
     while (!key[KEY_ESC]){
          clear_to_color(buffer, 0x000000);
          n.pintar(buffer);
          n.mover();
+         n.disparar(disparos, buffer);
 
 
-         if (key[KEY_SPACE] && n.temporizador()){
-            crear_bala(n.nDisparos, n.max_disp, disparos, n.posNaveX, n.posNaveY, -8);
-         }
-
-         pintar_bala(n.nDisparos, n.max_disp, disparos, buffer, n.imgBala);
-         elimina_bala(n.nDisparos, n.max_disp, disparos, 700, 390);
+         e.pintar(buffer);
+         e.disparar(disparosEnem, buffer);
 
          blit(buffer, screen, 0, 0, 0, 0, 700, 390);
          rest(20);
