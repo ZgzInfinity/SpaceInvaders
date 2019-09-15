@@ -11,14 +11,14 @@
  * Post: Ha creado una nave enemiga o de jugador a partir de los datos facilitados
  *       como parametros
  */
-void NaveJugador::construirNave(char* rutaNave, char* rutaBala, int anchoBala, int altoBala,int anchoPersonaje, int altoPersonaje,
+void NaveJugador::construirNave(char* rutaNave, char* rutaBala, char* rutaDisparo, char* rutaExplosion, int anchoBala, int altoBala,int anchoPersonaje, int altoPersonaje,
                          int posNavX, int posNavY, int direccionBala, int tip, int vid){
     // Asignacion de las coordenadas de la nave
     posNaveX = posNavX;
     posNaveY = posNavY;
     // Establecer el numero total de disparos de la nave y
     // cuantos se han disparado ya
-    max_disp = 4;
+    max_disp = 2;
     nDisparos = 0;
     // Contador de tiempo de la nave
     tick = 0;
@@ -37,6 +37,10 @@ void NaveJugador::construirNave(char* rutaNave, char* rutaBala, int anchoBala, i
     // Bitmaps con las imagenes de la nave del jugador y enemiga
     imgNave = load_bitmap(rutaNave, NULL);
     imgBala = load_bitmap(rutaBala, NULL);
+    imgExplosion = load_bitmap("Imagenes/nave.bmp", NULL);
+    disparo = load_wav(rutaDisparo);
+    explosivo = load_wav(rutaExplosion);
+
 }
 
 
@@ -105,5 +109,32 @@ void NaveJugador::disparar(Bala disparos[], BITMAP* buffer){
     if (tipo)
     crear_bala(nDisparos, max_disp, disparos, posNaveX, posNaveY, direccion);
     pintar_bala(nDisparos, max_disp, disparos, buffer, imgBala, ancho_b, alto_b);
-    elimina_bala(nDisparos, max_disp, disparos, 700, 390);
+    elimina_bala(nDisparos, max_disp, disparos, 600, 600);
+}
+
+
+
+void NaveJugador::explosion(BITMAP* buffer, BITMAP* fondo){
+    play_sample(explosivo, 255, 250, 1000, 0);
+    BITMAP *expMedio = create_bitmap(30, 20);
+    clear_to_color(expMedio, 0x000000);
+    for (int i = 0; i < 6; i++){
+        for (int j = 1; j <= 2; i++){
+            blit(expMedio, buffer, 0, 0, posNaveX, posNaveY, 30, 20);
+            masked_blit(imgExplosion, buffer, i * 30, 0, posNaveX, posNaveY, 30, 20);
+            imprimirFondoPartida(fondo, buffer);
+            blit(buffer, screen, 0, 0, 0, 0, 600, 600);
+            rest(50);
+        }
+    }
+}
+
+
+
+void NaveJugador::crear_bala_jugador(Bala disparos[]){
+        if (key[KEY_SPACE] && temporizador(5)){
+            if (crear_bala(nDisparos, max_disp, disparos, posNaveX, posNaveY, direccion)){
+                play_sample(disparo, 255, 250, 1000, 0);
+            }
+        }
 }

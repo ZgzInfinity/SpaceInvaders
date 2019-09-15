@@ -45,7 +45,7 @@ bool choque(int x1, int y1, int w1, int h1, int x2, int y2, int w2, int h2);
  *       maximo de disparos <<max_disparos>> entonces crea una bala en las coordenadas cartesianas
  *       <<x>> e <<y>> con una anchura <<dy>>.
  */
-void crear_bala(int& n_disparos, const int max_disparos, Bala disparos[],
+bool crear_bala(int& n_disparos, const int max_disparos, Bala disparos[],
                 const int X, const int Y ,const int dy);
 
 
@@ -98,8 +98,16 @@ void elimina_bala(int& n_disparos, const int max_disparos, Bala disparos[],
  *       con la posicion de la nave <<e>> entonces ha habido colision y se borra la nave enemigo con la
  *       bala con la que ha colisionado.
  */
-void eliminar_bala_choque(struct NaveJugador& n, struct NaveEnemigo& e, Bala b[]);
+bool eliminar_bala_choque(struct NaveJugador& n, struct NaveEnemigo& e, Bala b[]);
 
 
+/*
+ * Pre: <<n>> es el nave correspondiente al jugador, <<e>> es el la nave correspondiente a la nave
+ *      enemigo y <<b>> es una tabla que guarda el numero de balas disparadas por la nave del jugador.
+ * Post: Ha recorrido todas las balas guardadas en la tabla <<b>> y si la posicion de la bala coincide
+ *       con la posicion de la nave <<e>> entonces ha habido colision y se borra la nave enemigo con la
+ *       bala con la que ha colisionado.
+ */
+bool eliminar_bala_choque(struct NaveEnemigo& n, struct NaveJugador& e, Bala b[]);
 
 #endif // BALA_H_INCLUDED

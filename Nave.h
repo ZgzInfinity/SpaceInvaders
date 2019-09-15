@@ -3,6 +3,7 @@
 
 
 #include <allegro.h>
+#include "Graficos.h"
 
 /*
  * Representacion del tipo de dato Nave

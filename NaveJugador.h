@@ -40,6 +40,10 @@ struct NaveJugador {
     // Bitmaps con las imagenes de la nave del jugador y enemiga
     BITMAP *imgNave;
     BITMAP *imgBala;
+    BITMAP *imgExplosion;
+
+    SAMPLE *disparo;
+    SAMPLE *explosivo;
 
 
     /*
@@ -51,7 +55,7 @@ struct NaveJugador {
      * Post: Ha creado una nave enemiga o de jugador a partir de los datos facilitados
      *       como parametros
      */
-     void construirNave(char* rutaNave, char* rutaBala, int anchoBala, int altoBala, int anchoPersonaje,
+     void construirNave(char* rutaNave, char* rutaBala, char* rutaDisparo, char* rutaExplosion, int anchoBala, int altoBala, int anchoPersonaje,
                        int altoPersonaje, int posNavX, int posNavY, int direccionBala, int tip, int vid);
 
 
@@ -90,6 +94,14 @@ struct NaveJugador {
      *      despues por pantalla
      */
     void disparar(Bala disparos[], BITMAP* buffer);
+
+
+
+    void explosion(BITMAP* buffer, BITMAP* fondo);
+
+
+
+    void crear_bala_jugador(Bala disparos[]);
 
 };
 

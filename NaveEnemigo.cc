@@ -11,7 +11,7 @@
  * Post: Ha creado una nave enemiga o de jugador a partir de los datos facilitados
  *       como parametros
  */
-void NaveEnemigo::construirNave(char* rutaNave, char* rutaBala, int anchoBala, int altoBala, int anchoPersonaje, int altoPersonaje,
+void NaveEnemigo::construirNave(char* rutaNave, char* rutaBala, char* rutaDisparo, char* rutaExplosion, int anchoBala, int altoBala, int anchoPersonaje, int altoPersonaje,
                          int posNavX, int posNavY, int direccionBala, int tip, int vid){
 
     // Asignacion de las coordenadas de la nave
@@ -19,7 +19,7 @@ void NaveEnemigo::construirNave(char* rutaNave, char* rutaBala, int anchoBala, i
     posNaveY = posNavY;
     // Establecer el numero total de disparos de la nave y
     // cuantos se han disparado ya
-    max_disp = 4;
+    max_disp = 2;
     nDisparos = 0;
     // Contador de tiempo de la nave
     tick = 0;
@@ -37,6 +37,9 @@ void NaveEnemigo::construirNave(char* rutaNave, char* rutaBala, int anchoBala, i
     // Bitmaps con las imagenes de la nave del jugador y enemiga
     imgNave = load_bitmap(rutaNave, NULL);
     imgBala = load_bitmap(rutaBala, NULL);
+    imgExplosion = load_bitmap("Imagenes/pum_enemigo.bmp", NULL);
+    disparo = load_wav(rutaDisparo);
+    explosivo = load_wav(rutaExplosion);
 }
 
 
@@ -84,7 +87,23 @@ bool NaveEnemigo::temporizador(int tiempo){
 void NaveEnemigo::disparar(Bala disparos[], BITMAP* buffer){
     // Si es una nave de tipo enemigo entonces dispara la bala
     if (tipo)
-    crear_bala(nDisparos, max_disp, disparos, posNaveX, posNaveY, direccion);
+    if (crear_bala(nDisparos, max_disp, disparos, posNaveX, posNaveY, direccion)){
+        play_sample(disparo, 255, 250, 1000, 0);
+    }
     pintar_bala(nDisparos, max_disp, disparos, buffer, imgBala, ancho_b, alto_b);
-    elimina_bala(nDisparos, max_disp, disparos, 700, 390);
+    elimina_bala(nDisparos, max_disp, disparos, 600, 600);
 }
+
+
+
+void NaveEnemigo::explosion(BITMAP* buffer){
+    play_sample(explosivo, 255, 250, 1000, 0);
+    BITMAP *expMedio = create_bitmap(25, 20);
+    clear_to_color(expMedio, 0x000000);
+    blit(expMedio, buffer, 0, 0, posNaveX, posNaveY, 25, 20);
+    masked_blit(imgExplosion, buffer, 0, 0, posNaveX - 10, posNaveY, 41, 34);
+}
+
+
+
+

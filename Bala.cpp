@@ -23,7 +23,7 @@ bool choque(int x1, int y1, int w1, int h1, int x2, int y2, int w2, int h2){
  *       maximo de disparos <<max_disparos>> entonces crea una bala en las coordenadas cartesianas
  *       <<x>> e <<y>> con una anchura <<dy>>.
  */
-void crear_bala(int& n_disparos, const int max_disparos ,Bala disparos[] ,
+bool crear_bala(int& n_disparos, const int max_disparos ,Bala disparos[] ,
                 const int X, const int Y , const int dy){
     // Comprobar el numero de disparos efectuados
     if( n_disparos < max_disparos-1){
@@ -34,6 +34,10 @@ void crear_bala(int& n_disparos, const int max_disparos ,Bala disparos[] ,
         disparos[n_disparos].y  = Y;
         disparos[n_disparos].dx = 0;
         disparos[n_disparos].dy = dy;
+        return true;
+    }
+    else {
+        return false;
     }
 }
 
@@ -125,7 +129,7 @@ void elimina_bala(int& n_disparos, const int max_disparos, Bala disparos[],
  *       con la posicion de la nave <<e>> entonces ha habido colision y se borra la nave enemigo con la
  *       bala con la que ha colisionado.
  */
-void eliminar_bala_choque(struct NaveJugador& n, struct NaveEnemigo& e, Bala b[]){
+bool eliminar_bala_choque(struct NaveJugador& n, struct NaveEnemigo& e, Bala b[]){
      // Comprobar el numero de disparos efectuados
      if ( n.nDisparos > 0 && n.nDisparos < n.max_disp){
             // Si no se supera recorrrer tabla de balas de la nave
@@ -135,7 +139,36 @@ void eliminar_bala_choque(struct NaveJugador& n, struct NaveEnemigo& e, Bala b[]
                     // Si hay choque eliminar la bala y decrementar una vida de la nave
                     eliminar(b, n.nDisparos, cont);
                     e.vidas--;
+                    return true;
                 }
             }
+            return false;
+     }
+}
+
+
+
+
+/*
+ * Pre: <<n>> es el nave correspondiente al jugador, <<e>> es el la nave correspondiente a la nave
+ *      enemigo y <<b>> es una tabla que guarda el numero de balas disparadas por la nave del jugador.
+ * Post: Ha recorrido todas las balas guardadas en la tabla <<b>> y si la posicion de la bala coincide
+ *       con la posicion de la nave <<e>> entonces ha habido colision y se borra la nave enemigo con la
+ *       bala con la que ha colisionado.
+ */
+bool eliminar_bala_choque(struct NaveEnemigo& n, struct NaveJugador& e, Bala b[]){
+     // Comprobar el numero de disparos efectuados
+     if ( n.nDisparos > 0 && n.nDisparos < n.max_disp){
+            // Si no se supera recorrrer tabla de balas de la nave
+            for ( int cont = 1; cont <= n.nDisparos; cont++){
+                // Comprobar choque de la nave enemiga con la bala actual
+                if (choque(e.posNaveX, e.posNaveY, e.ancho_p, e.alto_p, b[cont].x, b[cont].y, n.ancho_b, n.ancho_p) && e.vidas > 0){
+                    // Si hay choque eliminar la bala y decrementar una vida de la nave
+                    eliminar(b, n.nDisparos, cont);
+                    e.vidas--;
+                    return true;
+                }
+            }
+            return false;
      }
 }
