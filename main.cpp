@@ -13,6 +13,7 @@
 #include "NaveJugador.h"
 #include "NaveEnemigo.h"
 #include "Graficos.h"
+#include "Escudo.h"
 
 
 using namespace std;
@@ -237,6 +238,7 @@ int main(){
     BITMAP *logo = load_bitmap("Imagenes/logo.bmp", NULL);
     BITMAP *p = load_bitmap("Imagenes/portada.bmp", NULL);
     BITMAP *fondo = load_bitmap("Imagenes/fondo.bmp", NULL);
+    BITMAP *escudo = load_bitmap("Imagenes/escudos.bmp", NULL);
     BITMAP *buffer = create_bitmap(600, 600);
 
     // Creacion de las pistas de juego
@@ -288,6 +290,10 @@ int main(){
     Bala disparos[MAX_BALAS];
     Bala disparosEnem[MAX_BALAS];
 
+    // Creacion del conjunto de escudos
+    Escudo escudos[30];
+    construirEscudos(escudos);
+
     // Indice del primer enemigo a disparar
     int azarEnemigo = rand() % 55;
     // Determinacion del movimiento y direccion de los enemigos
@@ -300,6 +306,10 @@ int main(){
     while (!key[KEY_ESC]){
          // Limpiar la pantalla de juego
          clear_to_color(buffer, 0x000000);
+
+         // Pintar los escudos
+         pintarEscudos(escudos, escudo, buffer);
+
          // Reproducir la banda actual de juego y verificar si se ha cambiado
          reproducirMusicaFondo(musica_fondo, pista);
 
@@ -328,6 +338,9 @@ int main(){
             }
          }
 
+         // Control de eliminacion de escudos al chocar las balas de la nave
+         eliminar_bala_escudo(n, escudos, disparos);
+
          // Controlar si los enemigos se deben mover
          if (e[0].temporizador(retardo)){
             // Tiempo transcurrido desde el movimiento anterior sobrepasado
@@ -347,6 +360,10 @@ int main(){
                 // Destruir la nave del jugador
                 n.explosion(buffer, fondo);
          }
+
+         // Control de elimininacion de escudos si chocan balas de enemigos
+         eliminar_bala_escudo(e[azarEnemigo], escudos, disparosEnem);
+
          // Imprimir todo en la pantalla de juego
          imprimir(fondo, buffer);
          blit(buffer, screen, 0, 0, 0, 0, 600, 600);

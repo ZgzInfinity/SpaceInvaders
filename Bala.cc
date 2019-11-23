@@ -110,16 +110,16 @@ void elimina_bala(int& n_disparos, const int max_disparos, Bala disparos[],
                   const int ANCHO, const int ALTO){
       // Comprobar el numero de disparos efectuados
       if ( n_disparos > 0 && n_disparos < max_disparos){
-            // Si no se supera recorrrer tabla de balas de la nave
-            for ( int cont = 1; cont <= n_disparos; cont++){
-                // Comprobr que la bala no ha salido de los limites del tablero
-                if ( disparos[cont].y > ALTO || disparos[cont].y < 0 ||
-                    disparos[cont].x > ANCHO|| disparos[cont].x < 0  ){
-                    // Si sale se borra
-                    eliminar(disparos, n_disparos, cont);
-                }
+        // Si no se supera recorrrer tabla de balas de la nave
+        for ( int cont = 1; cont <= n_disparos; cont++){
+            // Comprobr que la bala no ha salido de los limites del tablero
+            if ( disparos[cont].y > ALTO || disparos[cont].y < 0 ||
+                disparos[cont].x > ANCHO|| disparos[cont].x < 0  ){
+                // Si sale se borra
+                eliminar(disparos, n_disparos, cont);
             }
-      }
+        }
+    }
 }
 
 
@@ -134,18 +134,18 @@ void elimina_bala(int& n_disparos, const int max_disparos, Bala disparos[],
 bool eliminar_bala_choque(struct NaveJugador& n, struct NaveEnemigo& e, Bala b[]){
      // Comprobar el numero de disparos efectuados
      if ( n.nDisparos > 0 && n.nDisparos < n.max_disp){
-            // Si no se supera recorrrer tabla de balas de la nave
-            for ( int cont = 1; cont <= n.nDisparos; cont++){
-                // Comprobar choque de la nave enemiga con la bala actual
-                if (choque(e.posNaveX, e.posNaveY, e.ancho_p, e.alto_p, b[cont].x, b[cont].y, n.ancho_b, n.ancho_p) && e.vidas > 0){
-                    // Si hay choque eliminar la bala y decrementar una vida de la nave
-                    eliminar(b, n.nDisparos, cont);
-                    e.vidas--;
-                    return true;
-                }
+        // Si no se supera recorrrer tabla de balas de la nave
+        for ( int cont = 1; cont <= n.nDisparos; cont++){
+            // Comprobar choque de la nave enemiga con la bala actual
+            if (choque(e.posNaveX, e.posNaveY, e.ancho_p, e.alto_p, b[cont].x, b[cont].y, n.ancho_b, n.ancho_p) && e.vidas > 0){
+                // Si hay choque eliminar la bala y decrementar una vida de la nave
+                eliminar(b, n.nDisparos, cont);
+                e.vidas--;
+                return true;
             }
-            return false;
-     }
+        }
+        return false;
+    }
 }
 
 
@@ -161,16 +161,74 @@ bool eliminar_bala_choque(struct NaveJugador& n, struct NaveEnemigo& e, Bala b[]
 bool eliminar_bala_choque(struct NaveEnemigo& n, struct NaveJugador& e, Bala b[]){
      // Comprobar el numero de disparos efectuados
      if ( n.nDisparos > 0 && n.nDisparos < n.max_disp){
-            // Si no se supera recorrrer tabla de balas de la nave
-            for ( int cont = 1; cont <= n.nDisparos; cont++){
-                // Comprobar choque de la nave enemiga con la bala actual
-                if (choque(e.posNaveX, e.posNaveY, e.ancho_p, e.alto_p, b[cont].x, b[cont].y, n.ancho_b, n.ancho_p) && e.vidas > 0){
-                    // Si hay choque eliminar la bala y decrementar una vida de la nave
+        // Si no se supera recorrrer tabla de balas de la nave
+        for ( int cont = 1; cont <= n.nDisparos; cont++){
+            // Comprobar choque de la nave enemiga con la bala actual
+            if (choque(e.posNaveX, e.posNaveY, e.ancho_p, e.alto_p, b[cont].x, b[cont].y, n.ancho_b, n.ancho_p) && e.vidas > 0){
+                // Si hay choque eliminar la bala y decrementar una vida de la nave
+                eliminar(b, n.nDisparos, cont);
+                e.vidas--;
+                return true;
+            }
+        }
+        return false;
+     }
+}
+
+
+
+/*
+ * Pre: <<n>> es la nave correspondiente al jugador, <<ES>> es la tabla que almacena todos los
+ *      escudos generados en la partida y <<b>> es una tabla que guarda el numero de balas
+ *      disparadas por la nave del jugador
+ * Post: Ha recorrido todas las balas guardadas en la tabla <<b>> y si la posicion de la bala coincide
+ *       con la posicion de algun escudo de la tabla <<ES>> entonces ha habido colision, se aumenta
+ *       el danyo infligido al escudo y se borra bala con la que ha colisionado.
+ */
+void eliminar_bala_escudo(struct NaveJugador& n, struct Escudo ES[], Bala b[]){
+     // Comprobar el numero de disparos efectuados
+     if ( n.nDisparos > 0 && n.nDisparos < n.max_disp){
+        // Si no se supera recorrrer tabla de balas de la nave
+        for (int cont = 1; cont <= n.nDisparos; cont++){
+            // Recorrido de todos los escudos
+            for (int i = 0; i < NUM_ESCUDOS - 2; i ++){
+                // Verificacion de la colision entre bala y escudo i-seimo
+                if (choque(ES[i].x, ES[i].y, 20, 16, b[cont].x , b[cont].y, n.ancho_b, n.alto_b && ES[i].danyo < 3)){
+                    // Eliminacion de la bala
                     eliminar(b, n.nDisparos, cont);
-                    e.vidas--;
-                    return true;
+                    // Aumento del danyo causado
+                    ES[i].danyo++;
                 }
             }
-            return false;
+        }
+     }
+}
+
+
+
+/*
+ * Pre: <<n>> es la nave correspondiente al enemigo, <<ES>> es la tabla que almacena todos los
+ *      escudos generados en la partida y <<b>> es una tabla que guarda el numero de balas
+ *      disparadas por la nave del jugador
+ * Post: Ha recorrido todas las balas guardadas en la tabla <<b>> y si la posicion de la bala coincide
+ *       con la posicion de algun escudo de la tabla <<ES>> entonces ha habido colision, se aumenta
+ *       el danyo infligido al escudo y se borra bala con la que ha colisionado.
+ */
+void eliminar_bala_escudo(struct NaveEnemigo& n, struct Escudo ES[], Bala b[]){
+     // Comprobar el numero de disparos efectuados
+     if ( n.nDisparos > 0 && n.nDisparos < n.max_disp){
+        // Si no se supera recorrrer tabla de balas de la nave
+        for (int cont = 1; cont <= n.nDisparos; cont++){
+            // Recorrido de todos los escudos
+            for (int i = 0; i < NUM_ESCUDOS - 2; i ++){
+                // Verificacion de la colision entre bala y escudo i-seimo
+                if (choque(ES[i].x, ES[i].y, 20, 16, b[cont].x , b[cont].y, n.ancho_b, n.alto_b && ES[i].danyo < 3)){
+                    // Eliminacion de la bala
+                    eliminar(b, n.nDisparos, cont);
+                    // Aumento del danyo causado
+                    ES[i].danyo++;
+                }
+            }
+        }
      }
 }

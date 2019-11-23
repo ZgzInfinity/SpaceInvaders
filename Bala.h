@@ -8,6 +8,7 @@
 #include <allegro.h>
 #include "NaveJugador.h"
 #include "NaveEnemigo.h"
+#include "Escudo.h"
 
 #ifndef BALA_H_INCLUDED
 #define BALA_H_INCLUDED
@@ -92,7 +93,7 @@ void elimina_bala(int& n_disparos, const int max_disparos, Bala disparos[],
 
 
 /*
- * Pre: <<n>> es el nave correspondiente al jugador, <<e>> es el la nave correspondiente a la nave
+ * Pre: <<n>> es la nave correspondiente al jugador, <<e>> es el la nave correspondiente a la nave
  *      enemigo y <<b>> es una tabla que guarda el numero de balas disparadas por la nave del jugador.
  * Post: Ha recorrido todas las balas guardadas en la tabla <<b>> y si la posicion de la bala coincide
  *       con la posicion de la nave <<e>> entonces ha habido colision y se borra la nave enemigo con la
@@ -102,7 +103,7 @@ bool eliminar_bala_choque(struct NaveJugador& n, struct NaveEnemigo& e, Bala b[]
 
 
 /*
- * Pre: <<n>> es el nave correspondiente al jugador, <<e>> es el la nave correspondiente a la nave
+ * Pre: <<n>> es la nave correspondiente al jugador, <<e>> es el la nave correspondiente a la nave
  *      enemigo y <<b>> es una tabla que guarda el numero de balas disparadas por la nave del jugador.
  * Post: Ha recorrido todas las balas guardadas en la tabla <<b>> y si la posicion de la bala coincide
  *       con la posicion de la nave <<e>> entonces ha habido colision y se borra la nave enemigo con la
@@ -110,4 +111,30 @@ bool eliminar_bala_choque(struct NaveJugador& n, struct NaveEnemigo& e, Bala b[]
  */
 bool eliminar_bala_choque(struct NaveEnemigo& n, struct NaveJugador& e, Bala b[]);
 
-#endif // BALA_H_INCLUDED
+
+
+/*
+ * Pre: <<n>> es la nave correspondiente al jugador, <<ES>> es la tabla que almacena todos los
+ *      escudos generados en la partida y <<b>> es una tabla que guarda el numero de balas
+ *      disparadas por la nave del jugador
+ * Post: Ha recorrido todas las balas guardadas en la tabla <<b>> y si la posicion de la bala coincide
+ *       con la posicion de algun escudo de la tabla <<ES>> entonces ha habido colision, se aumenta
+ *       el danyo infligido al escudo y se borra bala con la que ha colisionado.
+ */
+void eliminar_bala_escudo(struct NaveJugador& n, struct Escudo ES[], Bala b[]);
+
+
+
+/*
+ * Pre: <<n>> es la nave correspondiente al enemigo, <<ES>> es la tabla que almacena todos los
+ *      escudos generados en la partida y <<b>> es una tabla que guarda el numero de balas
+ *      disparadas por la nave del jugador
+ * Post: Ha recorrido todas las balas guardadas en la tabla <<b>> y si la posicion de la bala coincide
+ *       con la posicion de algun escudo de la tabla <<ES>> entonces ha habido colision, se aumenta
+ *       el danyo infligido al escudo y se borra bala con la que ha colisionado.
+ */
+void eliminar_bala_escudo(struct NaveEnemigo& n, struct Escudo ES[], Bala b[]);
+
+
+
+#endif
