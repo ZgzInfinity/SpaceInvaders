@@ -45,7 +45,6 @@ void NaveJugador::construirNave(char* rutaNave, char* rutaBala, char* rutaDispar
 
 
 
-
 /*
  * Pre: <<buffer>> es un bitmap que almacena todas los bitmaps auxiliares a imprimir en pantalla;
  *      <<ix>> e <<iy>> son las coordenadas donde se va a pintar la nave
@@ -55,7 +54,6 @@ void NaveJugador::pintar(BITMAP* buffer, int ix, int iy){
     // Pintar la nave en bitmao buffer con toda su informacion
     masked_blit(imgNave, buffer, ix * ancho_p, iy * alto_p , posNaveX, posNaveY, ancho_p, alto_p);
 }
-
 
 
 
@@ -75,6 +73,7 @@ void NaveJugador::mover(){
         posNaveX += 5;
     }
 }
+
 
 
 /*
