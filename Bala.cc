@@ -193,7 +193,7 @@ void eliminar_bala_escudo(struct NaveJugador& n, struct Escudo ES[], Bala b[]){
             // Recorrido de todos los escudos
             for (int i = 0; i < NUM_ESCUDOS - 2; i ++){
                 // Verificacion de la colision entre bala y escudo i-seimo
-                if (choque(ES[i].x, ES[i].y, 20, 16, b[cont].x , b[cont].y, n.ancho_b, n.alto_b && ES[i].danyo < 3)){
+                if (choque(ES[i].x, ES[i].y, 20, 16, b[cont].x , b[cont].y, n.ancho_b, n.alto_b) && ES[i].danyo < 3){
                     // Eliminacion de la bala
                     eliminar(b, n.nDisparos, cont);
                     // Aumento del danyo causado
@@ -222,7 +222,7 @@ void eliminar_bala_escudo(struct NaveEnemigo& n, struct Escudo ES[], Bala b[]){
             // Recorrido de todos los escudos
             for (int i = 0; i < NUM_ESCUDOS - 2; i ++){
                 // Verificacion de la colision entre bala y escudo i-seimo
-                if (choque(ES[i].x, ES[i].y, 20, 16, b[cont].x , b[cont].y, n.ancho_b, n.alto_b && ES[i].danyo < 3)){
+                if (choque(ES[i].x, ES[i].y, 20, 16, b[cont].x , b[cont].y, n.ancho_b, n.alto_b) && ES[i].danyo < 3){
                     // Eliminacion de la bala
                     eliminar(b, n.nDisparos, cont);
                     // Aumento del danyo causado

@@ -41,7 +41,7 @@ void portada(BITMAP *p, SAMPLE* menu_portada, SAMPLE* startPressed){
             // Detecion de la musica del menu principal
             stop_sample(menu_portada);
             // Reproducir sonido del boton START
-            play_sample(startPressed, 255, 250, 1000, 0);
+            play_sample(startPressed, 255, 127, 1000, 0);
             y = 400;
             // Entrar en pantalla de instrucciones
             cargando = true;

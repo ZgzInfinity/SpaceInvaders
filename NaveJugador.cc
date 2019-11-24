@@ -114,7 +114,7 @@ void NaveJugador::disparar(Bala disparos[], BITMAP* buffer){
 
 
 void NaveJugador::explosion(BITMAP* buffer, BITMAP* fondo){
-    play_sample(explosivo, 255, 250, 1000, 0);
+    play_sample(explosivo, 255, 127, 1000, 0);
     BITMAP *expMedio = create_bitmap(30, 20);
     clear_to_color(expMedio, 0x000000);
     for (int i = 0; i < 6; i++){

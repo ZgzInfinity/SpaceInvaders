@@ -88,7 +88,7 @@ void NaveEnemigo::disparar(Bala disparos[], BITMAP* buffer){
     // Si es una nave de tipo enemigo entonces dispara la bala
     if (tipo)
     if (crear_bala(nDisparos, max_disp, disparos, posNaveX, posNaveY, direccion)){
-        play_sample(disparo, 255, 250, 1000, 0);
+        play_sample(disparo, 175, 127, 1000, 0);
     }
     pintar_bala(nDisparos, max_disp, disparos, buffer, imgBala, ancho_b, alto_b);
     elimina_bala(nDisparos, max_disp, disparos, 600, 600);
@@ -97,7 +97,7 @@ void NaveEnemigo::disparar(Bala disparos[], BITMAP* buffer){
 
 
 void NaveEnemigo::explosion(BITMAP* buffer){
-    play_sample(explosivo, 255, 250, 1000, 0);
+    play_sample(explosivo, 175, 127, 1000, 0);
     BITMAP *expMedio = create_bitmap(25, 20);
     clear_to_color(expMedio, 0x000000);
     blit(expMedio, buffer, 0, 0, posNaveX, posNaveY, 25, 20);
