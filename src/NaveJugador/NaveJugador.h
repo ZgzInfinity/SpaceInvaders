@@ -15,9 +15,13 @@
 #ifndef NAVEJUGADOR_H_INCLUDED
 #define NAVEJUGADOR_H_INCLUDED
 
+#include <iostream>
 #include <allegro.h>
 #include "../Bala/Bala.h"
 #include "../Nave/Nave.h"
+
+
+using namespace std;
 
 /*
  * Representacion del tipo de dato Nave
@@ -107,13 +111,16 @@ struct NaveJugador {
 
 
     /*
-     * Pre: <<buffer>> es el bitmap que guarda toda la accion del juego y
+     * Pre: <<buffer>> es el bitmap que guarda toda la accion del juego;
      *      <<fondo>> es el bitmap que guarda toda los datos referentes a la
-     *      partida
+     *      partida y <<muerto>> es un booleano que determina si la nave del
+     *      jugador sigue viva o no.
      * Post: Ha pintado la nave de la explosion de la nave del jugador
-     *       tras colisionar una bala enemiga con ella
+     *       tras colisionar una bala enemiga con ella y si tras impactar
+     *       a la nave le quedan mas vidas <<muerto>> toma valor falso.
+     *       En caso contrario toma valor <<true>>
      */
-    void explosion(BITMAP* buffer, BITMAP* fondo);
+    void explosion(BITMAP* buffer, BITMAP* fondo, bool& muerto);
 
 
 

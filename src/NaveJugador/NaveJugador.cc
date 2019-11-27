@@ -126,14 +126,17 @@ void NaveJugador::disparar(Bala disparos[], BITMAP* buffer){
 
 
 
-/*
- * Pre: <<buffer>> es el bitmap que guarda toda la accion del juego y
- *      <<fondo>> es el bitmap que guarda toda los datos referentes a la
- *      partida
- * Post: Ha pintado la nave de la explosion de la nave del jugador
- *       tras colisionar una bala enemiga con ella
- */
-void NaveJugador::explosion(BITMAP* buffer, BITMAP* fondo){
+    /*
+     * Pre: <<buffer>> es el bitmap que guarda toda la accion del juego;
+     *      <<fondo>> es el bitmap que guarda toda los datos referentes a la
+     *      partida y <<muerto>> es un booleano que determina si la nave del
+     *      jugador sigue viva o no.
+     * Post: Ha pintado la nave de la explosion de la nave del jugador
+     *       tras colisionar una bala enemiga con ella y si tras impactar
+     *       a la nave le quedan mas vidas <<muerto>> toma valor falso.
+     *       En caso contrario toma valor <<true>>
+     */
+void NaveJugador::explosion(BITMAP* buffer, BITMAP* fondo, bool& muerto){
     // Reproducir sonido de explosion
     play_sample(explosivo, 255, 127, 1000, 0);
     // Bitmap de la explosion
@@ -141,13 +144,17 @@ void NaveJugador::explosion(BITMAP* buffer, BITMAP* fondo){
     clear_to_color(expMedio, 0x000000);
     // Dibujo de la explosion de la nave
     for (int i = 0; i < 6; i++){
-        for (int j = 1; j <= 2; i++){
+        for (int j = 1; j <= 2; j++){
             blit(expMedio, buffer, 0, 0, posNaveX, posNaveY, 30, 20);
             masked_blit(imgExplosion, buffer, j * 30, 0, posNaveX, posNaveY, 30, 20);
             imprimirFondoPartida(fondo, buffer);
             blit(buffer, screen, 0, 0, 0, 0, 600, 600);
             rest(50);
         }
+    }
+    // Comprobar si el jugador tiene mas vidas
+    if (this->vidas == 0){
+        muerto = true;
     }
 }
 

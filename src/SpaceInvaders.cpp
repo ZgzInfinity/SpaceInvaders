@@ -192,11 +192,14 @@ int main(){
         // Control de finalizado de nivel
         bool terminado = false;
 
+        // Control de las vidas de la nave del jugador
+        bool muerto = false;
+
         // Contador de enemigos destruidos
         int enemigosDestruidos = 0;
 
         // El juego continua hasta que se presione la tecla ESCAPE
-        while (!terminado && !key[KEY_ESC]){
+        while (!terminado && !muerto && !key[KEY_ESC]){
             // Controlar si el jugador presiona la tecla pausa
             controlJuegoEnPausa(primera_pista, segunda_pista, tercera_pista,
                                 cuarta_pista, quinta_pista, sexta_pista,
@@ -264,7 +267,7 @@ int main(){
             // Si la bala disparada por un enemigo choca con el jugador
             if (eliminar_bala_choque(e[azarEnemigo], n, disparosEnem)){
                 // Destruir la nave del jugador
-                n.explosion(buffer, fondo);
+                n.explosion(buffer, fondo, muerto);
             }
 
             // Control de elimininacion de escudos si chocan balas de enemigos
@@ -292,7 +295,8 @@ int main(){
             // mostrar pantalla de victoria
             pantallaVictoria(victoria, musica_victoria);
         }
-        else {
+        // Si se termino porque le han quitado todas las vidas
+        else if(muerto){
             // mostrar pantalla de derrota
             pantallaDerrota(derrota, musica_derrota);
         }
