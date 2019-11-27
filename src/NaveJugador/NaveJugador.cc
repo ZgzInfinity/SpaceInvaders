@@ -50,7 +50,7 @@ void NaveJugador::construirNave(char* rutaNave, char* rutaBala, char* rutaDispar
     // Bitmaps con las imagenes de la nave del jugador y enemiga
     imgNave = load_bitmap(rutaNave, NULL);
     imgBala = load_bitmap(rutaBala, NULL);
-    imgExplosion = load_bitmap("../../images/nave.bmp", NULL);
+    imgExplosion = load_bitmap("images/nave.bmp", NULL);
     disparo = load_wav(rutaDisparo);
     explosivo = load_wav(rutaExplosion);
 

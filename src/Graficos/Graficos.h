@@ -63,4 +63,18 @@ void imprimirFondoPartida(BITMAP* fondo, BITMAP* buffer);
 bool bordeTablero(NaveEnemigo e[], int& direccion);
 
 
+
+/*
+ * Pre: <<credit1>> es el bitmap correspondiente a la primera pantalla de creditos
+ *      del juego; <<credit2>> es el bitmap correspondiente a la segunda pantalla de
+ *      creditos del juego; <<credit3>> es el bitmap correspondiente a la tercera
+ *      pantalla de creditos del juego; <<credit4>> es el bitmap correspondiente
+ *      a la cuarta pantalla de creditos del juego y <<musica_creditos>> es la
+ *      musica a reproducir durante los creditos
+ * Post: Ha mostrado las pantalla de creditos finales del juego
+ */
+void creditosFinales(BITMAP* credit1, BITMAP* credit2,
+                     BITMAP* credit3, BITMAP* credit4, SAMPLE* musica_creditos);
+
+
 #endif

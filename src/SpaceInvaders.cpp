@@ -88,6 +88,12 @@ int main(){
     BITMAP *jugar1 = load_bitmap("images/again1.bmp", NULL);
     BITMAP *jugar2 = load_bitmap("images/again2.bmp", NULL);
 
+    // Creacion de los bitmaps para las pantallas de creditos
+    BITMAP *cred1 = load_bitmap("images/cred1.bmp", NULL);
+    BITMAP *cred2 = load_bitmap("images/cred2.bmp", NULL);
+    BITMAP *cred3 = load_bitmap("images/cred3.bmp", NULL);
+    BITMAP *cred4 = load_bitmap("images/cred4.bmp", NULL);
+
     // Creacion de los efectos de juego
     SAMPLE *musica_portada = load_sample("soundtrack/MainTitle.wav");
     SAMPLE *musica_menu = load_sample("soundtrack/MainTitle2.wav");
@@ -96,6 +102,7 @@ int main(){
     SAMPLE *cambiar_modo = load_sample("soundEffects/ChangeMode.wav");
     SAMPLE *musica_victoria = load_sample("soundEffects/StageCleared.wav");
     SAMPLE *musica_derrota = load_sample("soundEffects/GameOver.wav");
+    SAMPLE *musica_creditos = load_sample("soundtrack/Credits.wav");
 
     // Pista que siena durante el menu de opciones y de retorno de juego
     SAMPLE *musica_opciones = load_sample("soundtrack/Megaman.wav");
@@ -292,6 +299,9 @@ int main(){
         // Preguntar al jugador si desea repetir la partida de nuevo
         pedirVolverJugar(jugar1, jugar2, start_pressed, musica_retorno, cambiar_modo, repeticion);
     }
+    // Mostrar creditos finales del juego
+    creditosFinales(cred1, cred2, cred3, cred4, musica_creditos);
+
     // Fin de la ejecucion del programa
     return 0;
 }
