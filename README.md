@@ -119,7 +119,7 @@ The following software has been used for the elaboration of the project:
 
 Some tips at the time of executing the program:
 
-* To listen to music it is recommended **not to make consecutive pulsations** since the program is very sensitive to keyboard
+* To listen to music it is recommended not to make consecutive pulsations since the program is very sensitive to keyboard
   interruptions, causing problems when playing the music tracks.
 * To run the program use the Script.bat file and don't start SpaceInvaders.exe.
 * Pause the game before minimizing it by pressing the TAB key.
@@ -131,7 +131,19 @@ the accomplishment of diverse games testing the different modes of departure, th
 effects and of the musical pitas. It has also been proven that the pause mode of the game and that the launch script runs on cmd
 console without any problem.
 
-## 6 Release
+In addition, tests have been performed using a PS2 controller configured with Xpadder instead of the keyboard in order to test
+usability and give users a perspective closer to desktop games.
+
+## 6 Execution
+
+To execute the program you must open the cmd console, preferably as administrator user, go to the directory where it is saved 
+and type the following command:
+
+```
+Script.bat
+```
+
+## 7 Release
 
 The release provided is a file with zip extension where the folder "images", the folder "soundtrack" have been compressed. the
 folder "soundeffects", the executable file of the game and a script to run it in the cmd console. Do not delete the folders or
