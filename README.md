@@ -132,7 +132,14 @@ effects and of the musical pitas. It has also been proven that the pause mode of
 console without any problem.
 
 In addition, tests have been performed using a PS2 controller configured with Xpadder instead of the keyboard in order to test
-usability and give users a perspective closer to desktop games.
+usability and give users a perspective closer to desktop games. The ps2 command configuration is shown below:
+
+* Space key - Cross button
+* Plus key (right of the keyboard) - Triangle button
+* Enter key - Start button
+* STAB key - Select button
+* ESCAPE key - L button
+* Cursor keys - crosshead buttons
 
 ## 6 Execution
 
