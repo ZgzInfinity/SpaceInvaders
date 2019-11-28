@@ -10,21 +10,21 @@
   </p>
 </p>
 
-## 1 Description
+## 1 - Description
 
 Space Invaders is a 1978 arcade game created by Tomohiro Nishikado. It was manufactured and sold by Taito in Japan, and licensed
 in the United States by the Midway division of Bally. Within the shooter genre, Space Invaders was the first fixed shooter and
 set the template for the shoot 'em up genre. The goal is to defeat wave after wave of descending aliens with a horizontally 
 moving laser to earn as many points as possible.
 
-## 2 Design
+## 2 - Design
 
 The game has been designed using keyboard controllers as the user uses the cursor keys to operate the ship and to fire bullets
 at enemy ships. In addition, while a game is in progress the player can also choose whether to play with background music or 
 not. Using Allegro's libraries, the player can enjoy both a brilliant graphic interface and high quality soundtrack 
 reproduction. Here it's going to be explained the different parts of which the game developed is composed.
 
-### 2.1 Introduction 
+### 2.1 - Introduction 
 
 Initially the game displays data about the game designer company, the date of creation and release, and copyright information as
 shown in the following images.
@@ -33,7 +33,7 @@ shown in the following images.
 
 ![enterprise](https://i.ibb.co/7Wjc72y/5.jpg)
 
-### 2.2 Main and instructions menu
+### 2.2 - Main and instructions menu
 
 After completing the game presentation, the main game menu is displayed. In order to continue, the player must press the ENTER 
 key. Next, the instruction screen is displayed, informing you which keys to use to move the ship and fire. This menu appears a
@@ -43,7 +43,7 @@ suitable time for the player to read it comfortably and then disappears.
 
 ![instructions](https://i.ibb.co/sV34pwN/0.png)
 
-### 2.3 Options menu
+### 2.3 - Options menu
 
 After viewing the instructions, a new menu is displayed where the user can choose the difficulty of the game. Using the cursor 
 arrows the user can choose in three game modes:
@@ -56,7 +56,7 @@ The difficulty is selected by pressing the ENTER key.
 
 ![difficult](https://i.ibb.co/TcNNFj2/0.jpg)
 
-### 2.4 Running the game!
+### 2.4 - Running the game!
 
 This point is when the game begins, the player's ship starts at the center of the screen. Use the cursor keys to move the ship 
 and use the space bar to shoot the villains. Be careful, the villains will be continually shooting at the player to try to kill
@@ -66,7 +66,7 @@ The following image shows a vision of the course of the game.
 
 ![playing](https://i.ibb.co/K20Rtcz/1.png)
 
-### 2.5 How the game can end?
+### 2.5 - How the game can end?
 
 The game can finish in three ways:
 
@@ -74,14 +74,14 @@ The game can finish in three ways:
 * Leaving the game by pressing the ESCAPE key.
 * The player loses all his lifes and is informed that he has lost.
 
-### 2.6 Game return
+### 2.6 - Game return
 
 At the end of the game, a new menu is displayed in which you are given the opportunity to play again, choosing freely between 
 each other and not. To do this, the player must press the ENTER key.
 
 ![return to play](https://i.ibb.co/xJDv3nM/2.jpg)
 
-### 2.7 Playing audio tracks
+### 2.7 - Playing audio tracks
 
 As explained earlier, the game has a set of very high quality music tracks. While the game is in progress, the player can choose 
 whether or not to listen to music. No soundtrack is played by default. If the user wants to play music he must press the key
@@ -89,13 +89,13 @@ with symbol + located on the right side of the keyboard. The player can choose f
 new track is played until the last one is reached. When you press again, playback is disabled and you return to the default
 settings.
 
-### 2.8 Game on pause
+### 2.8 - Game on pause
 
 Since the player can at any time stop the execution of the game and then resume it, the feature of being able to pause the game
 has been added. Pressing the TAB key pauses the game and stops the background music if one is active. To resume the game, the
 player must press the tab key again.
 
-### 2.9 Final
+### 2.9 - Final
 
 After asking the player if he wants to play again and answering no, the final credits of the game are shown. These credits show
 the name of the game with the developer company and the year of creation, the soundtrack used referencing their original game
@@ -105,7 +105,7 @@ development companies in order to garantee the copyright.
 
 ![copyright](https://i.ibb.co/fDrJnqm/1.jpg)
 
-## 3 Software used 
+## 3 - Software used 
 
 The following software has been used for the elaboration of the project:
 
@@ -115,7 +115,7 @@ The following software has been used for the elaboration of the project:
 * Photoshop CS6 
 * Paint 3D
 
-## 4 Tips
+## 4 - Tips
 
 Some tips at the time of executing the program:
 
@@ -124,7 +124,7 @@ Some tips at the time of executing the program:
 * To run the program use the Script.bat file and don't start SpaceInvaders.exe.
 * Pause the game before minimizing it by pressing the TAB key.
 
-## 5 Tests
+## 5 - Tests
 
 In order to check the correct functioning of the program, different tests have been carried out. These tests have consisted in
 the accomplishment of diverse games testing the different modes of departure, the response of the keys, the quality of the sound
@@ -141,7 +141,7 @@ usability and give users a perspective closer to desktop games. The ps2 command 
 * ESCAPE key - L button
 * Cursor keys - crosshead buttons
 
-## 6 Execution
+## 6 - Execution
 
 To execute the program you must open the cmd console, preferably as administrator user, go to the directory where it is saved 
 and type the following command:
@@ -150,7 +150,7 @@ and type the following command:
 Script.bat
 ```
 
-## 7 Release
+## 7 - Release
 
 The release provided is a file with zip extension where the folder "images", the folder "soundtrack" have been compressed. the
 folder "soundeffects", the executable file of the game and a script to run it in the cmd console. Do not delete the folders or
