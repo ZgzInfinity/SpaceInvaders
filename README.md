@@ -150,8 +150,7 @@ To execute the program you must go to the directory where it is saved and type t
 ```
 Script.bat
 ```
-It's important to run the the script as an administrator user in order to allow the copy of the libray of Allegro in your 
-"Windows" directory. 
+
 
 ## 7 - Release
 
