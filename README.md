@@ -14,7 +14,7 @@
 Space Invaders is a 1978 arcade game created by Tomohiro Nishikado. It was manufactured and sold by Taito in Japan, and licensed
 in the United States by the Midway division of Bally. Within the shooter genre, Space Invaders was the first fixed shooter and
 set the template for the shoot 'em up genre. The goal is to defeat wave after wave of descending aliens with a horizontally 
-moving laser to earn as many points as possible.
+moving laser to earn as many points as possible.  
 
 ## 2 - Design
 
@@ -22,6 +22,7 @@ The game has been designed using keyboard controllers as the user uses the curso
 at enemy ships. In addition, while a game is in progress the player can also choose whether to play with background music or 
 not. Using Allegro's libraries, the player can enjoy both a brilliant graphic interface and high quality soundtrack 
 reproduction. Here it's going to be explained the different parts of which the game developed is composed.
+Please pay special attention to the module **Tips and important details**.
 
 ### 2.1 - Introduction 
 
@@ -83,10 +84,9 @@ each other and not. To do this, the player must press the ENTER key.
 ### 2.7 - Playing audio tracks
 
 As explained earlier, the game has a set of very high quality music tracks. While the game is in progress, the player can choose 
-whether or not to listen to music. No soundtrack is played by default. If the user wants to play music he must press the key
-with symbol + located on the right side of the keyboard. The player can choose from a total of eight tracks. After each beat, a
-new track is played until the last one is reached. When you press again, playback is disabled and you return to the default
-settings.
+whether or not to listen to music. No soundtrack is played by default. If the user wants to play music he must press the ALT key
+of the keyboard. The player can choose from a total of eight tracks. After each beat, a new track is played until the last one
+is reached. When you press again, playback is disabled and you return to the default settings.
 
 ### 2.8 - Game on pause
 
@@ -114,7 +114,7 @@ The following software has been used for the elaboration of the project:
 * Photoshop CS6 
 * Paint 3D
 
-## 4 - Tips
+## 4 - Tips and important details
 
 Some tips at the time of executing the program:
 
@@ -122,6 +122,9 @@ Some tips at the time of executing the program:
   interruptions, causing problems when playing the music tracks.
 * To run the program use the Script.bat file and don't start SpaceInvaders.exe.
 * Pause the game before minimizing it by pressing the TAB key.
+* The folder "lib" contains a dll file, alld42.dll, it allows to execute the Allegro dependencies of the programm in your
+  personal computer. Please don't eliminate this file. It is going to be copied in your "Windows" directory in C.
+* Press ALT key to play the soundtrack list.
 
 ## 5 - Tests
 
@@ -134,9 +137,9 @@ In addition, tests have been performed using a PS2 controller configured with Xp
 usability and give users a perspective closer to desktop games. The ps2 command configuration is shown below:
 
 * Space key - Cross button
-* Plus key (right of the keyboard) - Triangle button
+* ALT key - Triangle button
 * Enter key - Start button
-* STAB key - Select button
+* TAB key - Select button
 * ESCAPE key - L button
 * Cursor keys - crosshead buttons
 
@@ -150,6 +153,7 @@ Script.bat
 
 ## 7 - Release
 
-The release provided is a file with zip extension where the folder "images", the folder "soundtrack" have been compressed. the
-folder "soundeffects", the executable file of the game and a script to run it in the cmd console. Do not delete the folders or
+The release provided is a file with zip extension where the folder "images", the folder "soundtrack" have been compressed, the
+folder "soundeffects", the folder "lib" which contains a dinamic library that allows to execute Allegro dependences in our 
+computer ,the executable file of the game and a script to run it in the cmd console. Do not delete the folders or
 anything they save because otherwise the game will not work properly.
