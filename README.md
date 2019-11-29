@@ -1,5 +1,4 @@
 <p align="center">
-  <a href="https://example.com/">
     <img src="https://i.ibb.co/J5mYnR0/logo.png" alt="Logo" width=400 height=200>
   </a>
 
@@ -93,7 +92,7 @@ settings.
 
 Since the player can at any time stop the execution of the game and then resume it, the feature of being able to pause the game
 has been added. Pressing the TAB key pauses the game and stops the background music if one is active. To resume the game, the
-player must press the tab key again.
+player must press the key TAB again.
 
 ### 2.9 - Final
 
@@ -143,8 +142,7 @@ usability and give users a perspective closer to desktop games. The ps2 command 
 
 ## 6 - Execution
 
-To execute the program you must open the cmd console, preferably as administrator user, go to the directory where it is saved 
-and type the following command:
+To execute the program you must go to the directory where it is saved and type the following command:
 
 ```
 Script.bat
