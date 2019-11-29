@@ -5,7 +5,7 @@
   <h3 align="center">Space Invaders</h3>
 
   <p align="center">
-    <b>A new remake of revolutionary game</b> <br>
+    <b>A new remake of a revolutionary game</b> <br>
   </p>
 </p>
 
