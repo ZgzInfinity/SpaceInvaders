@@ -120,7 +120,7 @@ Some tips at the time of executing the program:
 
 * To listen to music it is recommended not to make consecutive pulsations since the program is very sensitive to keyboard
   interruptions, causing problems when playing the music tracks.
-* To run the program use the Script.bat file and don't start SpaceInvaders.exe.
+* To run the program use the Script.bat file, it's in the Release, and don't start SpaceInvaders.exe.
 * Pause the game before minimizing it by pressing the TAB key.
 * The folder "lib" contains a dll file, alld42.dll, it allows to execute the Allegro dependencies of the programm in your
   personal computer. Please don't eliminate this file. It is going to be copied in your "Windows" directory in C.
