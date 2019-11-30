@@ -152,3 +152,9 @@ The release provided is a file with zip extension where the folder "images", the
 folder "soundeffects", a dll file to load the Allegro files in your computer, the executable file of the game and a script to 
 run it in the cmd console. Do not delete the folders or anything they save because otherwise the game will not work properly. 
 Besides, the release contains the Xpadder files of the  PS2 controller configuration used to test the game.
+
+## 8 - Trailer
+
+Watch the trailer of the video game here
+
+[![Promotional video](https://img.youtube.com/vi/s7qj2wzukik/0.jpg)](https://www.youtube.com/watch?v=s7qj2wzukik)
