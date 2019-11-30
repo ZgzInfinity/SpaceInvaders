@@ -144,8 +144,7 @@ usability and give users a perspective closer to desktop games. The ps2 command 
 
 ## 6 - Execution
 
-To execute the program you must go to the directory where it is saved and click Script.bat, perhaps, with administrator 
-permissions.
+To execute the program you must go to the directory where it is saved and click Script.bat.
 
 ## 7 - Release
 
