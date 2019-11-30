@@ -113,6 +113,7 @@ The following software has been used for the elaboration of the project:
 * Xpadder
 * Photoshop CS6 
 * Paint 3D
+* Camtasia
 
 ## 4 - Tips and important details
 
@@ -122,8 +123,6 @@ Some tips at the time of executing the program:
   interruptions, causing problems when playing the music tracks.
 * To run the program use the Script.bat file, it's in the Release, and don't start SpaceInvaders.exe.
 * Pause the game before minimizing it by pressing the TAB key.
-* The folder "lib" contains a dll file, alld42.dll, it allows to execute the Allegro dependencies of the programm in your
-  personal computer. Please don't eliminate this file. It is going to be copied in your "Windows" directory in C.
 * Press ALT key to play the soundtrack list.
 
 ## 5 - Tests
@@ -151,7 +150,6 @@ permissions.
 ## 7 - Release
 
 The release provided is a file with zip extension where the folder "images", the folder "soundtrack" have been compressed, the
-folder "soundeffects", the folder "lib" which contains a dinamic library that allows to execute Allegro dependences in our 
-computer ,the executable file of the game and a script to run it in the cmd console. Do not delete the folders or
-anything they save because otherwise the game will not work properly. Besides, the release contains the Xpadder files of the 
-PS2 controller configuration used to test the game
+folder "soundeffects", a dll file to load the Allegro files in your computer, the executable file of the game and a script to 
+run it in the cmd console. Do not delete the folders or anything they save because otherwise the game will not work properly. 
+Besides, the release contains the Xpadder files of the  PS2 controller configuration used to test the game.
