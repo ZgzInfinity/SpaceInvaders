@@ -153,4 +153,5 @@ permissions.
 The release provided is a file with zip extension where the folder "images", the folder "soundtrack" have been compressed, the
 folder "soundeffects", the folder "lib" which contains a dinamic library that allows to execute Allegro dependences in our 
 computer ,the executable file of the game and a script to run it in the cmd console. Do not delete the folders or
-anything they save because otherwise the game will not work properly.
+anything they save because otherwise the game will not work properly. Besides, the release contains the Xpadder files of the 
+PS2 controller configuration used to test the game
