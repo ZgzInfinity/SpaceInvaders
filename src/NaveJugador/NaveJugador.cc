@@ -172,7 +172,7 @@ void NaveJugador::crear_bala_jugador(Bala disparos[]){
         // Creacion de la bala
         if (crear_bala(nDisparos, max_disp, disparos, posNaveX, posNaveY, direccion)){
             // Reproducir sonido de disparo de la bala
-            play_sample(disparo, 255, 250, 1000, 0);
+            play_sample(disparo, 127, 127, 1000, 0);
         }
     }
 }

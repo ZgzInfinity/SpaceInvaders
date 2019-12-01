@@ -119,7 +119,7 @@ void NaveEnemigo::disparar(Bala disparos[], BITMAP* buffer){
  */
 void NaveEnemigo::explosion(BITMAP* buffer){
     // Reproducir sonido de explosion de nave enemiga
-    play_sample(explosivo, 175, 127, 1000, 0);
+    play_sample(explosivo, 127, 127, 1000, 0);
     // Bitmap de la nave enemiga
     BITMAP *expMedio = create_bitmap(25, 20);
     // Mostrar la explosion de la nave enemiga
