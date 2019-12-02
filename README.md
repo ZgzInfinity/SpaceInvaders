@@ -84,9 +84,9 @@ each other and not. To do this, the player must press the ENTER key.
 ### 2.7 - Playing audio tracks
 
 As explained earlier, the game has a set of very high quality music tracks. While the game is in progress, the player can choose 
-whether or not to listen to music. No soundtrack is played by default. If the user wants to play music he must press the ALT key
-of the keyboard. The player can choose from a total of eight tracks. After each beat, a new track is played until the last one
-is reached. When you press again, playback is disabled and you return to the default settings.
+whether or not to listen to music. No soundtrack is played by default. If the user wants to play music he must press the ALTG
+R key of the keyboard. The player can choose from a total of eight tracks. After each beat, a new track is played until the last
+one is reached. When you press again, playback is disabled and you return to the default settings.
 
 ### 2.8 - Game on pause
 
@@ -114,6 +114,7 @@ The following software has been used for the elaboration of the project:
 * Photoshop CS6 
 * Paint 3D
 * Camtasia
+* Sony Vegas Pro (version 10.0)
 
 ## 4 - Tips and important details
 
@@ -123,7 +124,7 @@ Some tips at the time of executing the program:
   interruptions, causing problems when playing the music tracks.
 * To run the program use the Script.bat file, it's in the Release, and don't start SpaceInvaders.exe.
 * Pause the game before minimizing it by pressing the TAB key.
-* Press ALT key to play the soundtrack list.
+* Press ALTGR key to play the soundtrack list.
 
 ## 5 - Tests
 
@@ -136,7 +137,7 @@ In addition, tests have been performed using a PS2 controller configured with Xp
 usability and give users a perspective closer to desktop games. The ps2 command configuration is shown below:
 
 * Space key - Cross button
-* ALT key - Triangle button
+* ALTGR key - Triangle button
 * Enter key - Start button
 * TAB key - Select button
 * ESCAPE key - L button
