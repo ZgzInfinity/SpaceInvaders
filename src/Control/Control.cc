@@ -44,7 +44,7 @@ void reproducirMusicaFondo(SAMPLE* primera_pista, SAMPLE* segunda_pista, SAMPLE*
                            SAMPLE* cuarta_pista, SAMPLE* quinta_pista, SAMPLE* sexta_pista,
                            SAMPLE* septima_pista, SAMPLE* octava_pista, int& pista, bool& primeraVuelta){
     // Si durante el juego el jugador presionar ENTER
-    if (key[KEY_ALT]){
+    if (key[KEY_ALTGR]){
         // Limpiar buffer de teclado e incrementar pista
         limpiarBufferTeclado(500);
         pista++;
