@@ -18,7 +18,7 @@
 #include <iostream>
 #include <allegro.h>
 #include "../Bala/Bala.h"
-#include "../Nave/Nave.h"
+#include "../Graficos/Graficos.h"
 
 
 using namespace std;

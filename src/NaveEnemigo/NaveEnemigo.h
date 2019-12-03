@@ -9,7 +9,6 @@
 
 #include <allegro.h>
 #include "../Bala/Bala.h"
-#include "../Nave/Nave.h"
 
 /*
  * Representacion del tipo de dato Nave

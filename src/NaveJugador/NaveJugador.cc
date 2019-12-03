@@ -31,7 +31,7 @@ void NaveJugador::construirNave(char* rutaNave, char* rutaBala, char* rutaDispar
     posNaveY = posNavY;
     // Establecer el numero total de disparos de la nave y
     // cuantos se han disparado ya
-    max_disp = 2;
+    max_disp = 4;
     nDisparos = 0;
     // Contador de tiempo de la nave
     tick = 0;
