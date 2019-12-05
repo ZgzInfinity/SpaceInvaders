@@ -25,7 +25,7 @@ using namespace std;
 const int MAX_DIM_ENEMIGOS = 60;
 const int NUM_ENEMIGOS = 55;
 const int MAX_BALAS = 8;
-const int NIVEL_MAXIMO = 6;
+const int NIVEL_MAXIMO = 3;
 
 
 
@@ -326,6 +326,10 @@ int main(){
             else{
                 // Incremento de la dificultad
                 nivel++;
+                if (nivel > NIVEL_MAXIMO){
+                    // Todos los subniveles completados
+                    nivel = 1;
+                }
             }
         }
         // Si se termino porque le han quitado todas las vidas
