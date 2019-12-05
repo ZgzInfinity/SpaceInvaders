@@ -168,3 +168,49 @@ void creditosFinales(BITMAP* credit1, BITMAP* credit2,
 }
 
 
+
+/*
+ * Pre: <<presentacion>> es el bitmap que muestra el cambio de nivel;
+ *      <<nivel1>> es un bitmap que muestra el primer nivel de juego;
+ *      <<nivel2>> es un bitmap que muestra el segundo nivel de juego;
+ *      <<nivel3>> es un bitmap que muestra el tercero nivel de juego;
+ *      <<musica_nivel>> es la musica a reproducir al presentar el nivel y
+ *      <<nivel>> es el nivel actual de dificultad de juego
+ * Post: Ha mostrado el nivel de dificultad actual en el que se va a jugar
+ *       reproducciendo el sonido de cambio de nivel
+ */
+void presentarNivel(BITMAP* presentacion, BITMAP* nivel1,
+                    BITMAP* nivel2, BITMAP* nivel3, SAMPLE* musica_nivel, int& nivel)
+{
+    // Reproducir sonido de los creditos
+    play_sample(musica_nivel, 255, 127, 1000, 0);
+    // Limpiar pantalla a negro
+    clear_to_color(screen, 0x000000);
+    // Mostrar pantalla de cambio de nivel
+    masked_blit(presentacion, screen, 0, 0, 0, 0, 600, 600);
+    // Detener ejecucion 5000 milisegundos
+    rest(2000);
+    // Limpiar pantalla a negro
+    clear_to_color(screen, 0x000000);
+    // Determinacion del nivel a jugar
+    switch(nivel){
+        case 1:
+            // Detecion de la pista 0 y reproduccion de la pista 1
+            masked_blit(nivel1, screen, 0, 0, 0, 0, 600, 600);
+            break;
+        case 2:
+            // Detecion de la pista 1 y reproduccion de la pista 2
+            masked_blit(nivel2, screen, 0, 0, 0, 0, 600, 600);
+            break;
+        case 3:
+            // Detecion de la pista 2 y reproduccion de la pista 3
+            masked_blit(nivel3, screen, 0, 0, 0, 0, 600, 600);
+            break;
+    }
+    // Detener ejecucion
+    rest(1500);
+    // Limpiar pantalla a negro
+    clear_to_color(screen, 0x000000);
+}
+
+

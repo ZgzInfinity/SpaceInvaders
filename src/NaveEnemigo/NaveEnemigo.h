@@ -42,6 +42,7 @@ struct NaveEnemigo {
     BITMAP *imgExplosion;
 
     SAMPLE *disparo;
+    SAMPLE *escudo;
     SAMPLE *explosivo;
 
 
@@ -54,8 +55,9 @@ struct NaveEnemigo {
      * Post: Ha creado una nave enemiga o de jugador a partir de los datos facilitados
      *       como parametros
      */
-    void construirNave(char* rutaNave, char* rutaBala, char* rutaDisparo, char* rutaExplosion, int anchoBala, int altoBala, int anchoPersonaje,
-                int altoPersonaje, int posNavX, int posNavY, int direccionBala, int tip, int vid);
+    void construirNave(char* rutaNave, char* rutaBala, char* rutaDisparo, char* rutaEscudo, char* rutaExplosion,
+                       int anchoBala, int altoBala, int anchoPersonaje, int altoPersonaje, int posNavX,
+                       int posNavY, int direccionBala, int tip, int vid);
 
 
 
@@ -112,10 +114,12 @@ void moverEnemigos(NaveEnemigo e[], int& mov, int& dir);
 
 /*
  * Pre: <<e>> es una lista con todos los enemigos naves del juego
+ *      y <<vidas>> son las vidas de los enemigos que varian con la
+ *      dificultad de la partida
  * Post: Ha guardado en la tabla <<e>> todas las naves enemigas que van
  *       a jugar
  */
-void insertarEnemigos(NaveEnemigo e[]);
+void insertarEnemigos(NaveEnemigo e[], int& vidas);
 
 
 

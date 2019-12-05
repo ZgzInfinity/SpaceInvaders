@@ -35,21 +35,35 @@ void limpiarBufferTeclado(const int tiempo){
 
 
 /*
- * Pre: <<musica_fondo>> es la banda sonora que se va a reproducir
- *      durante la partida y <<pista>> es el indice de la pista musical actual
- * Post: Ha reproducido la pista musical <<musica_fondo>> y ha guardado en <<<pista>>
- *       el indice correspondiente a la siguiente pista a reproducir
+ * Pre: <<primera_pista>> es la banda sonora correspondiente a la primera pista musical a reproducir
+ *      durante la partida; <<segunda_pista>> es la banda sonora correspondiente a la segunda pista
+ *      musical a reproducir durante la partida; <<tercera_pista>> es la banda sonora correspondiente
+ *      a la tercera pista musical a reproducir durante la partida; <<cuarta_pista>> es la banda
+ *      sonora correspondiente a la cuarta pista musical a reproducir durante la partida;
+ *      <<quinta_pista>> es la banda sonora correspondiente a la quinta pista musical a reproducir
+ *      durante la partida; <<sexta_pista>> es la banda sonora correspondiente a la sexta pista
+ *      musical a reproducir durante la partida; <<septima_pista>> es la banda sonora correspondiente
+ *      a la septima pista musical a reproducir durante la partida; <<octava_pista>> es la banda
+ *      sonora correspondiente a la octava pista musical a reproducir durante la partida;
+ *      <<novena_pista>> es la banda sonora correspondiente a la novena pista musical a reproducir
+ *      durante la partida; <<primeraVuelta>> es un control para ver si se han reproducido antes
+ *      todas las canciones del juego
+ * Post: Ha parado el juego tras presionar la tecla tabulador, emitiendo el sonido <<sonido_pausa>>
+ *       y parando la reproduccion de la pista musical <<pista>> hasta que se ha presionado de
+ *       nuevo la tecla tabulador reanundando el juego y volviendo reproducir la pista musical <<pista>>
  */
 void reproducirMusicaFondo(SAMPLE* primera_pista, SAMPLE* segunda_pista, SAMPLE* tercera_pista,
                            SAMPLE* cuarta_pista, SAMPLE* quinta_pista, SAMPLE* sexta_pista,
-                           SAMPLE* septima_pista, SAMPLE* octava_pista, int& pista, bool& primeraVuelta){
+                           SAMPLE* septima_pista, SAMPLE* octava_pista, SAMPLE* novena_pista,
+                           int& pista, bool& primeraVuelta)
+{
     // Si durante el juego el jugador presionar ENTER
     if (key[KEY_ALTGR]){
         // Limpiar buffer de teclado e incrementar pista
         limpiarBufferTeclado(500);
         pista++;
         // Control de desbordamiento de pistas ya que solo hay 9
-        if (pista == 9){
+        if (pista == NUM_SOUNDTRACKS){
             // Se completa la vuelta
             primeraVuelta = false;
             // Reinicio de la pista
@@ -64,42 +78,47 @@ void reproducirMusicaFondo(SAMPLE* primera_pista, SAMPLE* segunda_pista, SAMPLE*
                     stop_sample(octava_pista);
                 }
                 // Detecion de la pista 0 y reproduccion de la pista 1
-                play_sample(primera_pista, 255, 127, 1000, 0);
+                play_sample(primera_pista, 255, 127, 1000, 1);
                 break;
             case 2:
                 // Detecion de la pista 1 y reproduccion de la pista 2
                 stop_sample(primera_pista);
-                play_sample(segunda_pista, 255, 127, 1000, 0);
+                play_sample(segunda_pista, 255, 127, 1000, 1);
                 break;
             case 3:
                 // Detecion de la pista 2 y reproduccion de la pista 3
                 stop_sample(segunda_pista);
-                play_sample(tercera_pista, 255, 127, 1000, 0);
+                play_sample(tercera_pista, 255, 127, 1000, 1);
                 break;
             case 4:
                 // Detecion de la pista 3 y reproduccion de la pista 4
                 stop_sample(tercera_pista);
-                play_sample(cuarta_pista, 255, 127, 1000, 0);
+                play_sample(cuarta_pista, 255, 127, 1000, 1);
                 break;
             case 5:
                 // Detecion de la pista 4 y reproduccion de la pista 5
                 stop_sample(cuarta_pista);
-                play_sample(quinta_pista, 255, 127, 1000, 0);
+                play_sample(quinta_pista, 255, 127, 1000, 1);
                 break;
             case 6:
                 // Detecion de la pista 5 y reproduccion de la pista 6
                 stop_sample(quinta_pista);
-                play_sample(sexta_pista, 255, 127, 1000, 0);
+                play_sample(sexta_pista, 255, 127, 1000, 1);
                 break;
             case 7:
                 // Detecion de la pista 6 y reproduccion de la pista 7
                 stop_sample(sexta_pista);
-                play_sample(septima_pista, 255, 127, 1000, 0);
+                play_sample(septima_pista, 255, 127, 1000, 1);
                 break;
             case 8:
                 // Detecion de la pista 7 y reproduccion de la pista 8
                 stop_sample(septima_pista);
-                play_sample(octava_pista, 255, 127, 1000, 0);
+                play_sample(octava_pista, 255, 127, 1000, 1);
+                break;
+            case 9:
+                // Detecion de la pista 7 y reproduccion de la pista 8
+                stop_sample(octava_pista);
+                play_sample(novena_pista, 255, 127, 1000, 1);
                 break;
         }
     }
@@ -118,15 +137,17 @@ void reproducirMusicaFondo(SAMPLE* primera_pista, SAMPLE* segunda_pista, SAMPLE*
  *      musical a reproducir durante la partida; <<septima_pista>> es la banda sonora correspondiente
  *      a la septima pista musical a reproducir durante la partida; <<octava_pista>> es la banda
  *      sonora correspondiente a la octava pista musical a reproducir durante la partida;
- *      <<sonido_pausa>> es el sonido a emitir al parar el juego y <<pista>> es el indice de la
- *      actual pista musical en reproduccion
+ *      <<novena_pista>> es la banda sonora correspondiente a la novena pista musical a reproducir
+ *      durante la partida; <<sonido_pausa>> es el sonido a emitir al parar el juego y <<pista>>
+ *      es el indice de la actual pista musical en reproduccion
  * Post: Ha parado el juego tras presionar la tecla tabulador, emitiendo el sonido <<sonido_pausa>>
  *       y parando la reproduccion de la pista musical <<pista>> hasta que se ha presionado de
  *       nuevo la tecla tabulador reanundando el juego y volviendo reproducir la pista musical <<pista>>
  */
-void controlJuegoEnPausa(SAMPLE* primera_pista, SAMPLE* segunda_pista, SAMPLE* tercera_pista,
-                         SAMPLE* cuarta_pista, SAMPLE* quinta_pista, SAMPLE* sexta_pista,
-                         SAMPLE* septima_pista, SAMPLE* octava_pista, SAMPLE* sonido_pausa, int& pista){
+void controlJuegoEnPausa(SAMPLE* primera_pista, SAMPLE* segunda_pista, SAMPLE* tercera_pista, SAMPLE* cuarta_pista,
+                         SAMPLE* quinta_pista, SAMPLE* sexta_pista, SAMPLE* septima_pista, SAMPLE* octava_pista,
+                         SAMPLE* novena_pista, SAMPLE* sonido_pausa, int& pista)
+{
     // Control de si el jugador ha parado el juego
     if (key[KEY_TAB]){
         // Tecla de modo pausa pulsada
@@ -163,6 +184,10 @@ void controlJuegoEnPausa(SAMPLE* primera_pista, SAMPLE* segunda_pista, SAMPLE* t
             case 8:
                 // Se detiene la octava pista
                 stop_sample(octava_pista);
+                break;
+            case 9:
+                // Se detiene la novena pista
+                stop_sample(novena_pista);
         }
         rest(200);
         // Emitir sonido del modo pausa
@@ -183,35 +208,35 @@ void controlJuegoEnPausa(SAMPLE* primera_pista, SAMPLE* segunda_pista, SAMPLE* t
         switch(pista){
             case 1:
                 // Se detiene la primera pista
-                play_sample(primera_pista, 255, 127, 1000, 0);
+                play_sample(primera_pista, 255, 127, 1000, 1);
                 break;
             case 2:
                 // Se detiene la segunda pista
-                play_sample(segunda_pista, 255, 127, 1000, 0);
+                play_sample(segunda_pista, 255, 127, 1000, 1);
                 break;
             case 3:
                 // Se detiene la tercera pista
-                play_sample(tercera_pista, 255, 127, 1000, 0);
+                play_sample(tercera_pista, 255, 127, 1000, 1);
                 break;
             case 4:
                 // Se detiene la cuarta pista
-                play_sample(cuarta_pista, 255, 127, 1000, 0);
+                play_sample(cuarta_pista, 255, 127, 1000, 1);
                 break;
             case 5:
                 // Se detiene la quinta pista
-                play_sample(quinta_pista, 255, 127, 1000, 0);
+                play_sample(quinta_pista, 255, 127, 1000, 1);
                 break;
             case 6:
                 // Se detiene la sexta pista
-                play_sample(sexta_pista, 255, 127, 1000, 0);
+                play_sample(sexta_pista, 255, 127, 1000, 1);
                 break;
             case 7:
                 // Se detiene la septima pista
-                play_sample(septima_pista, 255, 127, 1000, 0);
+                play_sample(septima_pista, 255, 127, 1000, 1);
                 break;
             case 8:
                 // Se detiene la octava pista
-                play_sample(octava_pista, 255, 127, 1000, 0);
+                play_sample(octava_pista, 255, 127, 1000, 1);
                 break;
         }
     }

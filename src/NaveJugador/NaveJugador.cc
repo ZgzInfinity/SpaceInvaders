@@ -174,5 +174,6 @@ void NaveJugador::crear_bala_jugador(Bala disparos[]){
             // Reproducir sonido de disparo de la bala
             play_sample(disparo, 127, 127, 1000, 0);
         }
+        rest(30);
     }
 }

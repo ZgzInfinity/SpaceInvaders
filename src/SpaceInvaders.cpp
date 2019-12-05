@@ -24,10 +24,8 @@ using namespace std;
 
 const int MAX_DIM_ENEMIGOS = 60;
 const int NUM_ENEMIGOS = 55;
-const int MAX_BALAS = 4;
-
-
-
+const int MAX_BALAS = 8;
+const int NIVEL_MAXIMO = 6;
 
 
 
@@ -88,6 +86,13 @@ int main(){
     BITMAP *jugar1 = load_bitmap("images/again1.bmp", NULL);
     BITMAP *jugar2 = load_bitmap("images/again2.bmp", NULL);
 
+    // Creacion de los bitmaps para presentar los niveles de juego
+    BITMAP *presentacion = load_bitmap("images/PresentStage.bmp", NULL);
+    BITMAP *nivel1 = load_bitmap("images/Stage1.bmp", NULL);
+    BITMAP *nivel2 = load_bitmap("images/Stage2.bmp", NULL);
+    BITMAP *nivel3 = load_bitmap("images/Stage3.bmp", NULL);
+
+
     // Creacion de los bitmaps para las pantallas de creditos
     BITMAP *cred1 = load_bitmap("images/cred1.bmp", NULL);
     BITMAP *cred2 = load_bitmap("images/cred2.bmp", NULL);
@@ -95,20 +100,23 @@ int main(){
     BITMAP *cred4 = load_bitmap("images/cred4.bmp", NULL);
 
     // Creacion de los efectos de juego
-    SAMPLE *musica_portada = load_sample("soundtrack/MainTitle.wav");
-    SAMPLE *musica_menu = load_sample("soundtrack/MainTitle2.wav");
+
     SAMPLE *start_pressed = load_sample("soundEffects/StartPressed.wav");
     SAMPLE *sonido_pausa = load_sample("soundEffects/Pausa.wav");
     SAMPLE *cambiar_modo = load_sample("soundEffects/ChangeMode.wav");
     SAMPLE *musica_victoria = load_sample("soundEffects/StageCleared.wav");
     SAMPLE *musica_derrota = load_sample("soundEffects/GameOver.wav");
     SAMPLE *musica_creditos = load_sample("soundtrack/Credits.wav");
+    SAMPLE *musica_nivel = load_sample("soundEffects/Ready.wav");
+
 
     // Pista que siena durante el menu de opciones y de retorno de juego
     SAMPLE *musica_opciones = load_sample("soundtrack/Megaman.wav");
     SAMPLE *musica_retorno = load_sample("soundtrack/Nothingness.wav");
 
-    // Pistas que suenan durante la partida
+    // Bandas sonoras del juego
+    SAMPLE *musica_portada = load_sample("soundtrack/MainTitle.wav");
+    SAMPLE *musica_menu = load_sample("soundtrack/MainTitle2.wav");
     SAMPLE *primera_pista = load_sample("soundtrack/Alien3Stage2.wav");
     SAMPLE *segunda_pista = load_sample("soundtrack/Alien3Stage3.wav");
     SAMPLE *tercera_pista = load_sample("soundtrack/Alien3Stage5.wav");
@@ -117,6 +125,8 @@ int main(){
     SAMPLE *sexta_pista = load_sample("soundtrack/JungleBase.wav");
     SAMPLE *septima_pista = load_sample("soundtrack/MoonBeach.wav");
     SAMPLE *octava_pista = load_sample("soundtrack/TheLastSoul.wav");
+    SAMPLE *novena_pista = load_sample("soundtrack/SpaceCombat.wav");
+
 
     // Reproducir sonido de menu del juego y mostrar la portada del juego
     play_sample(musica_portada, 255, 127, 1000, 0);
@@ -147,6 +157,12 @@ int main(){
     // Control de repeticion de partida
     bool repeticion = true;
 
+    // Codigo de pista de reproduccion inicial
+    int pistaInicial = 0;
+
+    // Nivel actual de dificultad
+    int nivel = 1;
+
     // Mientras el jugador desee repetir otra vez
     while (repeticion){
 
@@ -156,6 +172,9 @@ int main(){
         // Seleccion de dificultad del juego en pantallas de opciones
         opciones(opcion1, opcion2, opcion3, musica_opciones, cambiar_modo, start_pressed, vidas);
 
+        // Presentacion del nivel de juego
+        presentarNivel(presentacion, nivel1, nivel2, nivel3, musica_nivel, nivel);
+
         // Dibujo de la nave del jugador en la posicion inferior del tablero con las vidas
         // pactadas en el menu de opciones
         NaveJugador n;
@@ -163,21 +182,21 @@ int main(){
                         (char*)"soundEffects/Bala.wav", (char*)"soundEffects/ExplosionJug.wav", 6, 12, 30, 20, 290, 500, -8, 0, vidas);
 
         // Codigo de la actual pista musical a repetir
-        int pista = 0;
+        int pista = pistaInicial;
 
         // Control de vuelta de sonidos
         bool primeraVuelta = true;
 
         // Creacion y insercion de los enemigos con los que jugar
         NaveEnemigo e[MAX_DIM_ENEMIGOS];
-        insertarEnemigos(e);
+        insertarEnemigos(e, nivel);
 
         // Maximo numero de disparos a efectuar por el jugador y los enemigos
         // Recomendado no cambiar porque se ralentiza
         Bala disparos[MAX_BALAS];
         Bala disparosEnem[MAX_BALAS];
 
-        // Creacion del conjunto de escudos
+        // Creacion del conjunto de escudos si estan habilitados
         Escudo escudos[30];
         construirEscudos(escudos);
 
@@ -201,9 +220,9 @@ int main(){
         // El juego continua hasta que se presione la tecla ESCAPE
         while (!terminado && !muerto && !key[KEY_ESC]){
             // Controlar si el jugador presiona la tecla pausa
-            controlJuegoEnPausa(primera_pista, segunda_pista, tercera_pista,
-                                cuarta_pista, quinta_pista, sexta_pista,
-                                septima_pista, octava_pista, sonido_pausa, pista);
+            controlJuegoEnPausa(primera_pista, segunda_pista, tercera_pista, cuarta_pista,
+                                quinta_pista, sexta_pista, septima_pista, octava_pista,
+                                novena_pista, sonido_pausa, pista);
 
             // Limpiar la pantalla de juego
             clear_to_color(buffer, 0x000000);
@@ -211,10 +230,11 @@ int main(){
             // Pintar los escudos
             pintarEscudos(escudos, escudo, buffer);
 
+
             // Reproducir la banda actual de juego y verificar si se ha cambiado
-            reproducirMusicaFondo(primera_pista, segunda_pista, tercera_pista,
-                                  cuarta_pista, quinta_pista, sexta_pista,
-                                  septima_pista, octava_pista, pista, primeraVuelta);
+            reproducirMusicaFondo(primera_pista, segunda_pista, tercera_pista, cuarta_pista,
+                                  quinta_pista, sexta_pista, septima_pista, octava_pista,
+                                  novena_pista, pista, primeraVuelta);
 
             // Controlar si los enemigos se deben mover
             if (e[0].temporizador(retardo)){
@@ -238,11 +258,13 @@ int main(){
                 // Si ha habido choque destruir la nave enemiga
                 if (eliminar_bala_choque(n, e[i], disparos)){
                     e[i].explosion(buffer);
-                    // Contabilizar el enemigo destruido
-                    enemigosDestruidos++;
-                    // Verificar si se acabo el nivel
-                    if (enemigosDestruidos == NUM_ENEMIGOS){
-                        terminado = true;
+                    // Contabilizar el enemigo destruido si sus vidas son cero
+                    if (e[i].vidas == 0){
+                        enemigosDestruidos++;
+                        // Verificar si se acabo el nivel
+                        if (enemigosDestruidos == NUM_ENEMIGOS){
+                            terminado = true;
+                        }
                     }
                 }
             }
@@ -289,11 +311,22 @@ int main(){
         stop_sample(sexta_pista);
         stop_sample(septima_pista);
         stop_sample(octava_pista);
+        stop_sample(novena_pista);
 
         // Si se termino porque gano el jugador
         if (terminado){
             // mostrar pantalla de victoria
             pantallaVictoria(victoria, musica_victoria);
+
+            // Incremento del nivel de dificultad maximo
+            if (nivel == NIVEL_MAXIMO){
+                // Reinicio
+                nivel = 1;
+            }
+            else{
+                // Incremento de la dificultad
+                nivel++;
+            }
         }
         // Si se termino porque le han quitado todas las vidas
         else if(muerto){
@@ -302,6 +335,9 @@ int main(){
         }
         // Preguntar al jugador si desea repetir la partida de nuevo
         pedirVolverJugar(jugar1, jugar2, start_pressed, musica_retorno, cambiar_modo, repeticion);
+
+        // Guaardado de la pista actal para continuar reproduccion a partir de ella
+        pistaInicial = pista - 1;
     }
     // Mostrar creditos finales del juego
     creditosFinales(cred1, cred2, cred3, cred4, musica_creditos);

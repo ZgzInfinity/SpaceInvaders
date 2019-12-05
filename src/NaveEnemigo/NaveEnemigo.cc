@@ -24,8 +24,8 @@
  * Post: Ha creado una nave enemiga o de jugador a partir de los datos facilitados
  *       como parametros
  */
-void NaveEnemigo::construirNave(char* rutaNave, char* rutaBala, char* rutaDisparo, char* rutaExplosion, int anchoBala, int altoBala, int anchoPersonaje, int altoPersonaje,
-                         int posNavX, int posNavY, int direccionBala, int tip, int vid){
+void NaveEnemigo::construirNave(char* rutaNave, char* rutaBala, char* rutaDisparo, char* rutaEscudo, char* rutaExplosion, int anchoBala, int altoBala,
+                                int anchoPersonaje, int altoPersonaje, int posNavX, int posNavY, int direccionBala, int tip, int vid){
 
     // Asignacion de las coordenadas de la nave
     posNaveX = posNavX;
@@ -52,6 +52,7 @@ void NaveEnemigo::construirNave(char* rutaNave, char* rutaBala, char* rutaDispar
     imgBala = load_bitmap(rutaBala, NULL);
     imgExplosion = load_bitmap("images/pum_enemigo.bmp", NULL);
     disparo = load_wav(rutaDisparo);
+    escudo = load_wav(rutaEscudo);
     explosivo = load_wav(rutaExplosion);
 }
 
@@ -118,8 +119,15 @@ void NaveEnemigo::disparar(Bala disparos[], BITMAP* buffer){
  *       con una bala del jugador
  */
 void NaveEnemigo::explosion(BITMAP* buffer){
-    // Reproducir sonido de explosion de nave enemiga
-    play_sample(explosivo, 127, 127, 1000, 0);
+    // Control del numero de vidas del enemigo
+    if (this->vidas == 0){
+        // Le quita un escudo al enemigo
+        play_sample(escudo, 127, 127, 1000, 0);
+    }
+    else {
+        // Reproducir sonido de explosion de nave enemiga porque lo mata
+        play_sample(explosivo, 127, 127, 1000, 0);
+    }
     // Bitmap de la nave enemiga
     BITMAP *expMedio = create_bitmap(25, 20);
     // Mostrar la explosion de la nave enemiga
@@ -161,10 +169,12 @@ void moverEnemigos(NaveEnemigo e[], int& mov, int& dir){
 
 /*
  * Pre: <<e>> es una lista con todos los enemigos naves del juego
+ *      y <<vidas>> son las vidas de los enemigos que varian con la
+ *      dificultad de la partida
  * Post: Ha guardado en la tabla <<e>> todas las naves enemigas que van
  *       a jugar
  */
-void insertarEnemigos(NaveEnemigo e[]){
+void insertarEnemigos(NaveEnemigo e[], int& vidas){
     // Indice de recorrido
     int indice = -1;
     // Tipo de nave enemiga
@@ -181,8 +191,8 @@ void insertarEnemigos(NaveEnemigo e[]){
             // Se guarda de tal forma que puede efectuar los disparos con sonido
             indice++;
             e[indice].construirNave((char*)"images/enemigos.bmp", (char*)"images/Bala_enem.bmp",
-                                    (char*)"soundEffects/Disparo.wav", (char*)"soundEffects/Explosion.wav",
-                                    6, 12, 25, 20, 140 + j * 30, 130 + i * 24, 8, tipo, 1);
+                                    (char*)"soundEffects/Disparo.wav",  (char*)"soundEffects/Explosion.wav",
+                                    (char*)"soundEffects/ExplosionShield.wav", 6, 12, 25, 20, 140 + j * 30, 130 + i * 24, 8, tipo, vidas);
         }
     }
 }

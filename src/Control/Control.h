@@ -23,6 +23,7 @@
 const int VIDAS_MODO_FACIL = 5;
 const int VIDAS_MODO_MEDIO = 3;
 const int VIDAS_MODO_DIFICIL = 1;
+const int NUM_SOUNDTRACKS = 10;
 
 
 
@@ -37,14 +38,26 @@ void limpiarBufferTeclado(const int tiempo);
 
 
 /*
- * Pre: <<musica_fondo>> es la banda sonora que se va a reproducir
- *      durante la partida y <<pista>> es el indice de la pista musical actual
- * Post: Ha reproducido la pista musical <<musica_fondo>> y ha guardado en <<<pista>>
- *       el indice correspondiente a la siguiente pista a reproducir
+ * Pre: <<primera_pista>> es la banda sonora correspondiente a la primera pista musical a reproducir
+ *      durante la partida; <<segunda_pista>> es la banda sonora correspondiente a la segunda pista
+ *      musical a reproducir durante la partida; <<tercera_pista>> es la banda sonora correspondiente
+ *      a la tercera pista musical a reproducir durante la partida; <<cuarta_pista>> es la banda
+ *      sonora correspondiente a la cuarta pista musical a reproducir durante la partida;
+ *      <<quinta_pista>> es la banda sonora correspondiente a la quinta pista musical a reproducir
+ *      durante la partida; <<sexta_pista>> es la banda sonora correspondiente a la sexta pista
+ *      musical a reproducir durante la partida; <<septima_pista>> es la banda sonora correspondiente
+ *      a la septima pista musical a reproducir durante la partida; <<octava_pista>> es la banda
+ *      sonora correspondiente a la octava pista musical a reproducir durante la partida;
+ *      <<novena_pista>> es la banda sonora correspondiente a la novena pista musical a reproducir
+ *      durante la partida; <<primeraVuelta>> es un control para ver si se han reproducido antes
+ *      todas las canciones del juego
+ * Post: Ha parado el juego tras presionar la tecla tabulador, emitiendo el sonido <<sonido_pausa>>
+ *       y parando la reproduccion de la pista musical <<pista>> hasta que se ha presionado de
+ *       nuevo la tecla tabulador reanundando el juego y volviendo reproducir la pista musical <<pista>>
  */
-void reproducirMusicaFondo(SAMPLE* primera_pista, SAMPLE* segunda_pista, SAMPLE* tercera_pista,
-                           SAMPLE* cuarta_pista, SAMPLE* quinta_pista, SAMPLE* sexta_pista,
-                           SAMPLE* septima_pista, SAMPLE* octava_pista, int& pista, bool& primeraVuelta);
+void reproducirMusicaFondo(SAMPLE* primera_pista, SAMPLE* segunda_pista, SAMPLE* tercera_pista, SAMPLE* cuarta_pista,
+                           SAMPLE* quinta_pista, SAMPLE* sexta_pista, SAMPLE* septima_pista, SAMPLE* octava_pista,
+                           SAMPLE* novena_pista, int& pista, bool& primeraVuelta);
 
 
 
@@ -59,15 +72,16 @@ void reproducirMusicaFondo(SAMPLE* primera_pista, SAMPLE* segunda_pista, SAMPLE*
  *      musical a reproducir durante la partida; <<septima_pista>> es la banda sonora correspondiente
  *      a la septima pista musical a reproducir durante la partida; <<octava_pista>> es la banda
  *      sonora correspondiente a la octava pista musical a reproducir durante la partida;
- *      <<sonido_pausa>> es el sonido a emitir al parar el juego y <<pista>> es el indice de la
- *      actual pista musical en reproduccion
+ *      <<novena_pista>> es la banda sonora correspondiente a la novena pista musical a reproducir
+ *      durante la partida; <<sonido_pausa>> es el sonido a emitir al parar el juego y <<pista>>
+ *      es el indice de la actual pista musical en reproduccion
  * Post: Ha parado el juego tras presionar la tecla tabulador, emitiendo el sonido <<sonido_pausa>>
  *       y parando la reproduccion de la pista musical <<pista>> hasta que se ha presionado de
  *       nuevo la tecla tabulador reanundando el juego y volviendo reproducir la pista musical <<pista>>
  */
-void controlJuegoEnPausa(SAMPLE* primera_pista, SAMPLE* segunda_pista, SAMPLE* tercera_pista,
-                         SAMPLE* cuarta_pista, SAMPLE* quinta_pista, SAMPLE* sexta_pista,
-                         SAMPLE* septima_pista, SAMPLE* octava_pista, SAMPLE* sonido_pausa, int& pista);
+void controlJuegoEnPausa(SAMPLE* primera_pista, SAMPLE* segunda_pista, SAMPLE* tercera_pista, SAMPLE* cuarta_pista,
+                         SAMPLE* quinta_pista, SAMPLE* sexta_pista, SAMPLE* septima_pista,
+                         SAMPLE* octava_pista, SAMPLE* novena_pista, SAMPLE* sonido_pausa, int& pista);
 
 
 
