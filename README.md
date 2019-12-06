@@ -52,8 +52,9 @@ arrows the user can choose in three game modes:
 * Medium mode: the ship of the player has three lifes.
 * Hard mode: the ship of the player has one lifes.
 
-The difficulty is selected by pressing the ENTER key. For each difficulty mode there are three sublevels in which the lives of 
-the enemies are increased.  Before starting a game, the player is informed of the level in which he is going to play.
+The difficulty is selected by pressing the ENTER key. There are eight sublevels in which the lifes of the enemies are increased.
+In each level the player can choose with how many lifes wants to play. Before starting a game, the player is informed of the 
+level in which he is going to play.
 
 ![difficult](https://i.ibb.co/TcNNFj2/0.jpg)
 
