@@ -67,6 +67,7 @@ void reproducirMusicaFondo(SAMPLE* primera_pista, SAMPLE* segunda_pista, SAMPLE*
             // Se completa la vuelta
             primeraVuelta = false;
             // Reinicio de la pista
+            stop_sample(novena_pista);
             pista = 0;
         }
         // Determinacion de que pista se debe tocar en funcion de la actual
