@@ -25,7 +25,7 @@ using namespace std;
 const int MAX_DIM_ENEMIGOS = 60;
 const int NUM_ENEMIGOS = 55;
 const int MAX_BALAS = 8;
-const int NIVEL_MAXIMO = 3;
+const int NIVEL_MAXIMO = 8;
 
 
 
@@ -91,6 +91,11 @@ int main(){
     BITMAP *nivel1 = load_bitmap("images/Stage1.bmp", NULL);
     BITMAP *nivel2 = load_bitmap("images/Stage2.bmp", NULL);
     BITMAP *nivel3 = load_bitmap("images/Stage3.bmp", NULL);
+    BITMAP *nivel4 = load_bitmap("images/Stage4.bmp", NULL);
+    BITMAP *nivel5 = load_bitmap("images/Stage5.bmp", NULL);
+    BITMAP *nivel6 = load_bitmap("images/Stage6.bmp", NULL);
+    BITMAP *nivel7 = load_bitmap("images/Stage7.bmp", NULL);
+    BITMAP *nivel8 = load_bitmap("images/Stage8.bmp", NULL);
 
 
     // Creacion de los bitmaps para las pantallas de creditos
@@ -173,7 +178,8 @@ int main(){
         opciones(opcion1, opcion2, opcion3, musica_opciones, cambiar_modo, start_pressed, vidas);
 
         // Presentacion del nivel de juego
-        presentarNivel(presentacion, nivel1, nivel2, nivel3, musica_nivel, nivel);
+        presentarNivel(presentacion, nivel1, nivel2, nivel3, nivel4, nivel5,
+                        nivel6, nivel7, nivel8, musica_nivel, nivel);
 
         // Dibujo de la nave del jugador en la posicion inferior del tablero con las vidas
         // pactadas en el menu de opciones

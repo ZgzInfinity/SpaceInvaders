@@ -173,14 +173,20 @@ void creditosFinales(BITMAP* credit1, BITMAP* credit2,
  * Pre: <<presentacion>> es el bitmap que muestra el cambio de nivel;
  *      <<nivel1>> es un bitmap que muestra el primer nivel de juego;
  *      <<nivel2>> es un bitmap que muestra el segundo nivel de juego;
- *      <<nivel3>> es un bitmap que muestra el tercero nivel de juego;
+ *      <<nivel3>> es un bitmap que muestra el tercer nivel de juego;
+ *      <<nivel4>> es un bitmap que muestra el cuarto nivel de juego;
+ *      <<nivel5>> es un bitmap que muestra el quinto nivel de juego;
+ *      <<nivel6>> es un bitmap que muestra el sexto nivel de juego;
+ *      <<nivel7>> es un bitmap que muestra el septimo nivel de juego;
+ *      <<nivel8>> es un bitmap que muestra el octavo nivel de juego;
  *      <<musica_nivel>> es la musica a reproducir al presentar el nivel y
  *      <<nivel>> es el nivel actual de dificultad de juego
  * Post: Ha mostrado el nivel de dificultad actual en el que se va a jugar
  *       reproducciendo el sonido de cambio de nivel
  */
-void presentarNivel(BITMAP* presentacion, BITMAP* nivel1,
-                    BITMAP* nivel2, BITMAP* nivel3, SAMPLE* musica_nivel, int& nivel)
+void presentarNivel(BITMAP* presentacion, BITMAP* nivel1, BITMAP* nivel2, BITMAP* nivel3,
+                    BITMAP* nivel4, BITMAP* nivel5, BITMAP* nivel6, BITMAP* nivel7,
+                    BITMAP* nivel8, SAMPLE* musica_nivel, int& nivel)
 {
     // Reproducir sonido de los creditos
     play_sample(musica_nivel, 255, 127, 1000, 0);
@@ -205,6 +211,26 @@ void presentarNivel(BITMAP* presentacion, BITMAP* nivel1,
         case 3:
             // Detecion de la pista 2 y reproduccion de la pista 3
             masked_blit(nivel3, screen, 0, 0, 0, 0, 600, 600);
+            break;
+        case 4:
+            // Detecion de la pista 0 y reproduccion de la pista 1
+            masked_blit(nivel4, screen, 0, 0, 0, 0, 600, 600);
+            break;
+        case 5:
+            // Detecion de la pista 1 y reproduccion de la pista 2
+            masked_blit(nivel5, screen, 0, 0, 0, 0, 600, 600);
+            break;
+        case 6:
+            // Detecion de la pista 2 y reproduccion de la pista 3
+            masked_blit(nivel6, screen, 0, 0, 0, 0, 600, 600);
+            break;
+        case 7:
+            // Detecion de la pista 0 y reproduccion de la pista 1
+            masked_blit(nivel7, screen, 0, 0, 0, 0, 600, 600);
+            break;
+        case 8:
+            // Detecion de la pista 1 y reproduccion de la pista 2
+            masked_blit(nivel8, screen, 0, 0, 0, 0, 600, 600);
             break;
     }
     // Detener ejecucion

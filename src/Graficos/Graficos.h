@@ -82,14 +82,20 @@ void creditosFinales(BITMAP* credit1, BITMAP* credit2,
  * Pre: <<presentacion>> es el bitmap que muestra el cambio de nivel;
  *      <<nivel1>> es un bitmap que muestra el primer nivel de juego;
  *      <<nivel2>> es un bitmap que muestra el segundo nivel de juego;
- *      <<nivel3>> es un bitmap que muestra el tercero nivel de juego;
+ *      <<nivel3>> es un bitmap que muestra el tercer nivel de juego;
+ *      <<nivel4>> es un bitmap que muestra el cuarto nivel de juego;
+ *      <<nivel5>> es un bitmap que muestra el quinto nivel de juego;
+ *      <<nivel6>> es un bitmap que muestra el sexto nivel de juego;
+ *      <<nivel7>> es un bitmap que muestra el septimo nivel de juego;
+ *      <<nivel8>> es un bitmap que muestra el octavo nivel de juego;
  *      <<musica_nivel>> es la musica a reproducir al presentar el nivel y
  *      <<nivel>> es el nivel actual de dificultad de juego
  * Post: Ha mostrado el nivel de dificultad actual en el que se va a jugar
  *       reproducciendo el sonido de cambio de nivel
  */
-void presentarNivel(BITMAP* presentacion, BITMAP* nivel1,
-                    BITMAP* nivel2, BITMAP* nivel3, SAMPLE* musica_nivel, int& nivel);
+void presentarNivel(BITMAP* presentacion, BITMAP* nivel1, BITMAP* nivel2, BITMAP* nivel3,
+                    BITMAP* nivel4, BITMAP* nivel5, BITMAP* nivel6, BITMAP* nivel7,
+                    BITMAP* nivel8, SAMPLE* musica_nivel, int& nivel);
 
 
 #endif
