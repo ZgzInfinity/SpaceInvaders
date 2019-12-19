@@ -10,7 +10,8 @@
 </p>
 
 [![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-blue.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/) 
-[![windows](https://img.shields.io/badge/Windows%20-compatible-1df31a.svg)](https://www.microsoft.com/es-es/windows) 
+[![windows](https://img.shields.io/badge/Windows%20-compatible-1df31a.svg)](https://www.microsoft.com/es-es/windows)
+[![Allegro](https://img.shields.io/badge/Use%20-Allegro-f3661a.svg)](https://liballeg.org/)
 [![Version](https://img.shields.io/badge/Version%20-2.0-8a1af3.svg)](https://github.com/ZgzInfinity/SpaceInvaders/releases)
 
 ## 1 - Description
